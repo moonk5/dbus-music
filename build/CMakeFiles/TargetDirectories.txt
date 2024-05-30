@@ -1,0 +1,3 @@
+/home/moonk5/developments/git/dbus-music/build/CMakeFiles/dbus-music.dir
+/home/moonk5/developments/git/dbus-music/build/CMakeFiles/edit_cache.dir
+/home/moonk5/developments/git/dbus-music/build/CMakeFiles/rebuild_cache.dir
