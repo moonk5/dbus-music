@@ -5,9 +5,13 @@
 #include <string>
 
 #include "log.h"
+#include "mpris_media_player.h"
 
 int main(void) {
-  Log::error("TEST");
+
+  MprisMediaPlayer mmp("org.mpris.MediaPlayer2.ncspot");
+
+  mmp.connect();
 
   return 0;
 }

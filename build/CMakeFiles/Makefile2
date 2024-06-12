@@ -81,12 +81,12 @@ clean: CMakeFiles/dbus-music.dir/clean
 CMakeFiles/dbus-music.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/dbus-music.dir/build.make CMakeFiles/dbus-music.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/dbus-music.dir/build.make CMakeFiles/dbus-music.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/moonk5/developments/git/dbus-music/build/CMakeFiles --progress-num=1,2 "Built target dbus-music"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/moonk5/developments/git/dbus-music/build/CMakeFiles --progress-num=1,2,3 "Built target dbus-music"
 .PHONY : CMakeFiles/dbus-music.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/dbus-music.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/moonk5/developments/git/dbus-music/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/moonk5/developments/git/dbus-music/build/CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/dbus-music.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/moonk5/developments/git/dbus-music/build/CMakeFiles 0
 .PHONY : CMakeFiles/dbus-music.dir/rule

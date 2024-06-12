@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/moonk5/developments/git/dbus-music/src/main.cpp" "CMakeFiles/dbus-music.dir/src/main.cpp.o" "gcc" "CMakeFiles/dbus-music.dir/src/main.cpp.o.d"
+  "/home/moonk5/developments/git/dbus-music/src/mpris_media_player.cpp" "CMakeFiles/dbus-music.dir/src/mpris_media_player.cpp.o" "gcc" "CMakeFiles/dbus-music.dir/src/mpris_media_player.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

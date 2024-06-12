@@ -153,6 +153,30 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/dbus-music.dir/build.make CMakeFiles/dbus-music.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/mpris_media_player.o: src/mpris_media_player.cpp.o
+.PHONY : src/mpris_media_player.o
+
+# target to build an object file
+src/mpris_media_player.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dbus-music.dir/build.make CMakeFiles/dbus-music.dir/src/mpris_media_player.cpp.o
+.PHONY : src/mpris_media_player.cpp.o
+
+src/mpris_media_player.i: src/mpris_media_player.cpp.i
+.PHONY : src/mpris_media_player.i
+
+# target to preprocess a source file
+src/mpris_media_player.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dbus-music.dir/build.make CMakeFiles/dbus-music.dir/src/mpris_media_player.cpp.i
+.PHONY : src/mpris_media_player.cpp.i
+
+src/mpris_media_player.s: src/mpris_media_player.cpp.s
+.PHONY : src/mpris_media_player.s
+
+# target to generate assembly for a file
+src/mpris_media_player.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dbus-music.dir/build.make CMakeFiles/dbus-music.dir/src/mpris_media_player.cpp.s
+.PHONY : src/mpris_media_player.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -165,6 +189,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/mpris_media_player.o"
+	@echo "... src/mpris_media_player.i"
+	@echo "... src/mpris_media_player.s"
 .PHONY : help
 
 

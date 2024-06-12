@@ -8,6 +8,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 
 include_directories(include)
 set(SOURCES
+  src/mpris_media_player.cpp
   src/main.cpp
 )
 add_executable(

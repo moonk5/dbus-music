@@ -1,1 +1,1 @@
-/sbin/c++  -std=c++17 -g "CMakeFiles/dbus-music.dir/src/main.cpp.o" -o dbus-music  -ldbus-1
+/sbin/c++  -std=c++17 -g "CMakeFiles/dbus-music.dir/src/mpris_media_player.cpp.o" "CMakeFiles/dbus-music.dir/src/main.cpp.o" -o dbus-music  -ldbus-1

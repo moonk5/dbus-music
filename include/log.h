@@ -6,27 +6,43 @@
 #include <memory>
 #include <spdlog/common.h>
 #include <spdlog/logger.h>
+#include <spdlog/spdlog.h>
 #include <string>
 
 class Log {
 public:
-  const std::string LOG_FILENAME = "dbus-music";
-  Log() {
+  Log() {}
+
+  Log(const std::string &filename) : log_filename(filename) {
     try {
-      _logger = spdlog::basic_logger_mt(LOG_FILENAME, LOG_FILENAME + ".log");
+      logger = spdlog::basic_logger_mt(log_filename, log_filename + ".log");
+
+      spdlog::set_level(spdlog::level::debug);
     } catch (const spdlog::spdlog_ex &ex) {
       std::cout << "ERROR: Log init failed: " << ex.what() << std::endl;
     }
   }
 
-  static void error(const std::string &msg) {
-    if (_logger != nullptr) {
-      _logger->error(msg);
+  void debug(const std::string &msg) {
+
+    if (logger != nullptr) {
+      logger->debug(msg);
+      std::cout << "logger is not NULL" << std::endl;
+
+    } else {
+      std::cout << "logger is NULL" << std::endl;
+    }
+  }
+
+  void error(const std::string &msg) {
+    if (logger != nullptr) {
+      logger->error(msg);
     }
   }
 
 private:
-  static std::shared_ptr<spdlog::logger> _logger;
+  std::string log_filename;
+  std::shared_ptr<spdlog::logger> logger;
 };
 
 #endif /* LOG_H */

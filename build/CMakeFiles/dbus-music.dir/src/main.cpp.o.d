@@ -309,4 +309,6 @@ CMakeFiles/dbus-music.dir/src/main.cpp.o: \
  /home/moonk5/developments/git/dbus-music/include/spdlog/details/file_helper-inl.h \
  /home/moonk5/developments/git/dbus-music/include/spdlog/sinks/base_sink.h \
  /home/moonk5/developments/git/dbus-music/include/spdlog/sinks/base_sink-inl.h \
- /home/moonk5/developments/git/dbus-music/include/spdlog/sinks/basic_file_sink-inl.h
+ /home/moonk5/developments/git/dbus-music/include/spdlog/sinks/basic_file_sink-inl.h \
+ /home/moonk5/developments/git/dbus-music/include/mpris_media_player.h \
+ /home/moonk5/developments/git/dbus-music/include/log.h
