@@ -6,6 +6,13 @@
 #include <iostream>
 #include <string>
 
+typedef enum ErrorCode {
+  SUCCESS = 1,
+  DBUS_ERROR = -1,
+  NULL_PTR = -2,
+
+} ErrorCodeType;
+
 typedef enum DbusMethods {
   Next,
   OpenUri,
@@ -37,17 +44,19 @@ typedef enum DbusProperties {
 
 class MprisMediaPlayer {
 public:
-  static const std::string PATH = "/org/mpris/MediaPlayer2";
+  static const std::string PATH;
 
 public:
   MprisMediaPlayer(const std::string &session_name);
-  ~MprisMediaPlayer();
+
+  void get_metadata(const std::string &service_name);
+
+private:
+  std::string get_dbus_error(const std::string &msg, DBusError *err);
+  void print_dbus_variant(DBusMessageIter *iter);
 
   int connect();
 
-  void print_dbus_error(const std::string &msg, DBusError *err);
-
-private:
   DBusConnection *conn;
   DBusError err;
   DBusMessage *reply;
