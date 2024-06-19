@@ -9,14 +9,16 @@
 
 int main(void) {
 
-  MprisMediaPlayer mmp("org.mpris.MediaPlayer2.ncspot");
-
-  //  const std::string service_name = "org.mpris.MediaPlayer2.ncspot";
   const std::string service_name =
-      "org.mpris.MediaPlayer2.firefox.instance_1_20";
-  std::cout << "Fetching metadata from service: " << service_name << std::endl;
+      "org.mpris.MediaPlayer2.ncspot.instance3633390";
+  // const std::string service_name =
+  //     "org.mpris.MediaPlayer2.firefox.instance_1_20";
 
-  mmp.get_metadata(service_name);
+  MprisMediaPlayer mmp(service_name);
+
+  mmp.test_menu();
+
+  // mmp.get_metadata(service_name);
 
   return 0;
 }

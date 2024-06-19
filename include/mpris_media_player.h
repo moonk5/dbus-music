@@ -2,19 +2,21 @@
 #define MPRIS_MEDIA_PLAYER_H
 
 #include "log.h"
+#include <cstdint>
 #include <dbus/dbus.h>
 #include <iostream>
 #include <string>
 
 typedef enum ErrorCode {
-  SUCCESS = 1,
+  NONE = 1,
   DBUS_ERROR = -1,
   NULL_PTR = -2,
+  UNKNOWN_TYPE = -3
 
 } ErrorCodeType;
 
 typedef enum DbusMethods {
-  Next,
+  Next = 1,
   OpenUri,
   Pause,
   Play,
@@ -49,19 +51,51 @@ public:
 public:
   MprisMediaPlayer(const std::string &session_name);
 
+  // FIXME: search for list of services
+
+  bool can_control();
+  bool can_go_next();
+  bool can_go_previous();
+  bool can_pause();
+  bool can_play();
+  bool can_seek();
+
+  void next();
+  void pause();
+  void play();
+  void play_pause();
+  void previous();
+  void seek(int64_t offset);
+  //  void set_position(track, int64_t position);
+  void stop();
+
   void get_metadata(const std::string &service_name);
+
+  /* Test */
+  void test_menu();
 
 private:
   std::string get_dbus_error(const std::string &msg, DBusError *err);
   void print_dbus_variant(DBusMessageIter *iter);
 
   int connect();
+  void disconnect();
 
+  DBusMessage *_dbus_msg_new_method_call(const std::string &dest,
+                                         const std::string &path,
+                                         const std::string &iface,
+                                         const std::string &method);
+  int construct_new_dbus_msg(DBusMessage *&msg, DbusMethodType type);
+  int construct_new_dbus_msg(DBusMessage *&msg, DbusPropertyType type);
+
+  int send_dbus_msg(DBusMessage *&msg);
+  int send_dbus_msg_with_reply(DBusMessage *&msg, DBusMessage *&reply,
+                               DBusError &err);
+
+  bool is_connected;
   DBusConnection *conn;
-  DBusError err;
-  DBusMessage *reply;
 
-  std::string bus_name;
+  std::string session_name;
 
   Log log;
 };

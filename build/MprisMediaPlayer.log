@@ -15,3 +15,56 @@
 [2024-06-12 17:59:40.006] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot) is connected
 [2024-06-12 18:01:56.591] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot) is connected
 [2024-06-12 18:03:09.186] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot) is connected
+[2024-06-13 14:30:21.311] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot) is connected
+[2024-06-13 14:57:55.903] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot) is connected
+[2024-06-13 14:57:55.904] [MprisMediaPlayer] [error] [DBUS ERROR] Error in Send Message: org.freedesktop.DBus.Error.ServiceUnknown - The name is not activatable
+[2024-06-13 14:58:23.020] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot) is connected
+[2024-06-13 14:58:23.020] [MprisMediaPlayer] [error] [DBUS ERROR] Error in Send Message: org.freedesktop.DBus.Error.ServiceUnknown - The name is not activatable
+[2024-06-13 14:59:28.500] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot) is connected
+[2024-06-13 14:59:28.500] [MprisMediaPlayer] [error] [DBUS ERROR] Error in Send Message: org.freedesktop.DBus.Error.ServiceUnknown - The name is not activatable
+[2024-06-13 15:00:03.660] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot) is connected
+[2024-06-13 15:00:03.661] [MprisMediaPlayer] [error] [DBUS ERROR] Error in Send Message: org.freedesktop.DBus.Error.ServiceUnknown - The name is not activatable
+[2024-06-13 15:00:28.611] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot) is connected
+[2024-06-13 15:00:28.611] [MprisMediaPlayer] [error] [DBUS ERROR] Error in Send Message: org.freedesktop.DBus.Error.ServiceUnknown - The name is not activatable
+[2024-06-13 15:02:13.431] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot) is connected
+[2024-06-13 15:02:13.431] [MprisMediaPlayer] [error] [DBUS ERROR] Error in Send Message: org.freedesktop.DBus.Error.ServiceUnknown - The name is not activatable
+[2024-06-13 15:02:49.516] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot) is connected
+[2024-06-13 15:02:49.517] [MprisMediaPlayer] [error] [DBUS ERROR] Error in Send Message: org.freedesktop.DBus.Error.ServiceUnknown - The name is not activatable
+[2024-06-13 15:02:49.517] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot) is connected
+[2024-06-13 15:06:02.922] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot) is connected
+[2024-06-13 15:06:02.922] [MprisMediaPlayer] [error] [DBUS ERROR] Error in Send Message: org.freedesktop.DBus.Error.ServiceUnknown - The name is not activatable
+[2024-06-13 15:06:02.922] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot) is connected
+[2024-06-13 15:09:23.779] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot) is connected
+[2024-06-13 15:09:23.779] [MprisMediaPlayer] [error] [DBUS ERROR] Error in Send Message: org.freedesktop.DBus.Error.ServiceUnknown - The name is not activatable
+[2024-06-13 15:13:21.270] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot) is connected
+[2024-06-13 15:28:09.984] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance1013973) is connected
+[2024-06-13 15:32:47.105] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance1013973) is connected
+[2024-06-13 15:42:04.221] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance1013973) is connected
+[2024-06-13 15:51:11.236] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance1013973) is connected
+[2024-06-17 16:05:22.862] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance3633390) is connected
+[2024-06-17 16:06:04.187] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance3633390) is connected
+[2024-06-17 16:23:13.412] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance3633390) is connected
+[2024-06-17 16:24:24.162] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance3633390) is connected
+[2024-06-17 17:56:38.432] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance3633390) is connected
+[2024-06-17 17:59:22.795] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance3633390) is connected
+[2024-06-17 18:07:23.564] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance3633390) is connected
+[2024-06-18 14:50:11.228] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance3633390) is connected
+[2024-06-18 14:52:21.424] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance3633390) is connected
+[2024-06-18 14:58:09.110] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance3633390) is connected
+[2024-06-18 16:13:54.353] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance3633390) is connected
+[2024-06-18 16:13:55.113] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance3633390) is connected
+[2024-06-18 16:13:55.848] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance3633390) is connected
+[2024-06-18 16:13:56.406] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance3633390) is connected
+[2024-06-18 16:13:56.881] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance3633390) is connected
+[2024-06-18 16:13:57.394] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance3633390) is connected
+[2024-06-18 16:13:57.774] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance3633390) is connected
+[2024-06-18 16:14:23.014] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance3633390) is connected
+[2024-06-18 16:14:29.518] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance3633390) is connected
+[2024-06-18 16:18:32.696] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance3633390) is connected
+[2024-06-18 16:18:39.658] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance3633390) is connected
+[2024-06-18 16:18:40.301] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance3633390) is connected
+[2024-06-18 16:18:40.942] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance3633390) is connected
+[2024-06-18 16:41:33.937] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance3633390) is connected
+[2024-06-18 16:44:23.286] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance3633390) is connected
+[2024-06-18 16:54:37.377] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance3633390) is connected
+[2024-06-18 16:55:54.761] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance3633390) is connected
