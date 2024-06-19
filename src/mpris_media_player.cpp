@@ -2,6 +2,7 @@
 #include "dbus/dbus-protocol.h"
 #include <bits/types/struct_sched_param.h>
 #include <new>
+#include <system_error>
 
 const std::string MprisMediaPlayer::PATH = "/org/mpris/MediaPlayer2";
 
@@ -47,6 +48,103 @@ int MprisMediaPlayer::connect() {
 void MprisMediaPlayer::disconnect() {
   dbus_connection_unref(conn);
   is_connected = false;
+}
+
+std::string
+MprisMediaPlayer::convert_dbus_method_type_to_string(DbusMethodType type) {
+  std::string method_str;
+
+  switch (type) {
+  case Next:
+    method_str = "Next";
+    break;
+  case OpenUri:
+    method_str = "OpenUri";
+    break;
+  case Pause:
+    method_str = "Pause";
+    break;
+  case Play:
+    method_str = "Play";
+    break;
+  case PlayPause:
+    method_str = "PlayPause";
+    break;
+  case Previous:
+    method_str = "Previous";
+    break;
+  case Seek:
+    method_str = "Seek";
+    break;
+  case SetPosition:
+    method_str = "SetPosition";
+    break;
+  case Stop:
+    method_str = "Stop";
+    break;
+  default:
+    method_str = "Unknown";
+    break;
+  }
+
+  return method_str;
+}
+std::string
+MprisMediaPlayer::convert_dbus_property_type_to_string(DbusPropertyType type) {
+  std::string property_str;
+
+  switch (type) {
+  case CanControl:
+    property_str = "CanControl";
+    break;
+  case CanGoNext:
+    property_str = "CanGoNext";
+    break;
+  case CanGoPrevious:
+    property_str = "CanGoPrevious";
+    break;
+  case CanPause:
+    property_str = "CanPause";
+    break;
+  case CanPlay:
+    property_str = "CanPlay";
+    break;
+  case CanSeek:
+    property_str = "CanSeek";
+    break;
+  case LoopStatus:
+    property_str = "LoopStatus";
+    break;
+  case MaximumRate:
+    property_str = "MaximumRate";
+    break;
+  case Metadata:
+    property_str = "Metadata";
+    break;
+  case MinimumRate:
+    property_str = "MinimumRate";
+    break;
+  case PlaybackStatus:
+    property_str = "PlaybackStatus";
+    break;
+  case Position:
+    property_str = "Position";
+    break;
+  case Rate:
+    property_str = "Rate";
+    break;
+  case Shuffle:
+    property_str = "Shuffle";
+    break;
+  case Volume:
+    property_str = "Volume";
+    break;
+  defaut:
+    property_str = "Unknown";
+    break;
+  }
+
+  return property_str;
 }
 
 std::string MprisMediaPlayer::get_dbus_error(const std::string &msg,
@@ -154,37 +252,7 @@ DBusMessage *MprisMediaPlayer::_dbus_msg_new_method_call(
 int MprisMediaPlayer::construct_new_dbus_msg(DBusMessage *&msg,
                                              DbusMethodType type) {
   std::string iface = "org.mpris.MediaPlayer2.Player";
-  std::string method;
-
-  switch (type) {
-  case Next:
-    method = "Next";
-    break;
-  case OpenUri:
-    method = "OpenUri";
-    break;
-  case Pause:
-    method = "Pause";
-    break;
-  case Play:
-    method = "Play";
-    break;
-  case PlayPause:
-    method = "PlayPause";
-    break;
-  case Seek:
-    method = "Seek";
-    break;
-  case SetPosition:
-    method = "SetPosition";
-    break;
-  case Stop:
-    method = "Stop";
-    break;
-  defaut:
-    method = "Unknown";
-    break;
-  }
+  std::string method = convert_dbus_method_type_to_string(type);
 
   if (method == "Unknown") {
     return UNKNOWN_TYPE;
@@ -215,57 +283,7 @@ int MprisMediaPlayer::construct_new_dbus_msg(DBusMessage *&msg,
   }
 
   // Append arguments
-  switch (type) {
-  case CanControl:
-    param_property_name = "CanControl";
-    break;
-  case CanGoNext:
-    param_property_name = "CanGoNext";
-    break;
-  case CanGoPrevious:
-    param_property_name = "CanGoPrevious";
-    break;
-  case CanPause:
-    param_property_name = "CanPause";
-    break;
-  case CanPlay:
-    param_property_name = "CanPlay";
-    break;
-  case CanSeek:
-    param_property_name = "CanSeek";
-    break;
-  case LoopStatus:
-    param_property_name = "LoopStatus";
-    break;
-  case MaximumRate:
-    param_property_name = "MaximumRate";
-    break;
-  case Metadata:
-    param_property_name = "Metadata";
-    break;
-  case MinimumRate:
-    param_property_name = "MinimumRate";
-    break;
-  case PlaybackStatus:
-    param_property_name = "PlaybackStatus";
-    break;
-  case Position:
-    param_property_name = "Position";
-    break;
-  case Rate:
-    param_property_name = "Rate";
-    break;
-  case Shuffle:
-    param_property_name = "Shuffle";
-    break;
-  case Volume:
-    param_property_name = "Volume";
-    break;
-  defaut:
-    param_property_name = "Unknown";
-    break;
-  }
-
+  param_property_name = convert_dbus_property_type_to_string(type);
   if (param_property_name == "Unknown") {
     return UNKNOWN_TYPE;
   }
@@ -504,12 +522,8 @@ bool MprisMediaPlayer::can_pause() { return true; }
 bool MprisMediaPlayer::can_play() { return true; }
 bool MprisMediaPlayer::can_seek() { return true; }
 
-void MprisMediaPlayer::play_pause() {
-  DBusError err;
+void MprisMediaPlayer::execute_base_method_func(DbusMethodType type) {
   DBusMessage *msg;
-
-  // Initialize the error
-  dbus_error_init(&err);
 
   // Connect to the session bus
   if (!is_connected && !connect()) {
@@ -517,7 +531,7 @@ void MprisMediaPlayer::play_pause() {
   }
 
   // Create a new method call Message
-  if (construct_new_dbus_msg(msg, PlayPause) != ErrorCode::NONE) {
+  if (construct_new_dbus_msg(msg, type) != ErrorCode::NONE) {
     return;
   }
 
@@ -529,7 +543,18 @@ void MprisMediaPlayer::play_pause() {
   dbus_message_unref(msg);
   disconnect();
   std::cout << "Cleanup done." << std::endl;
+
+  return;
 }
+
+void MprisMediaPlayer::next() { execute_base_method_func(Next); }
+void MprisMediaPlayer::pause() { execute_base_method_func(Pause); }
+void MprisMediaPlayer::play() { execute_base_method_func(Play); }
+void MprisMediaPlayer::play_pause() { execute_base_method_func(PlayPause); }
+void MprisMediaPlayer::previous() { execute_base_method_func(Previous); }
+// void MprisMediaPlayer::seek(int64_t offset);
+//  void set_position(track, int64_t position);
+void MprisMediaPlayer::stop() { execute_base_method_func(Stop); }
 
 void MprisMediaPlayer::test_menu() {
 

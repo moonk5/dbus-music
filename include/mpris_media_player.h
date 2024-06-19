@@ -21,6 +21,7 @@ typedef enum DbusMethods {
   Pause,
   Play,
   PlayPause,
+  Previous,
   Seek,
   SetPosition,
   Stop
@@ -66,10 +67,13 @@ public:
   void play_pause();
   void previous();
   void seek(int64_t offset);
-  //  void set_position(track, int64_t position);
+  // void set_position(track, int64_t position);
   void stop();
 
   void get_metadata(const std::string &service_name);
+
+  std::string convert_dbus_method_type_to_string(DbusMethodType type);
+  std::string convert_dbus_property_type_to_string(DbusPropertyType type);
 
   /* Test */
   void test_menu();
@@ -91,6 +95,8 @@ private:
   int send_dbus_msg(DBusMessage *&msg);
   int send_dbus_msg_with_reply(DBusMessage *&msg, DBusMessage *&reply,
                                DBusError &err);
+
+  void execute_base_method_func(DbusMethodType type);
 
   bool is_connected;
   DBusConnection *conn;
