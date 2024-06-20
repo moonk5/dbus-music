@@ -8,14 +8,14 @@
 #include <string>
 
 typedef enum ErrorCode {
-  NONE = 1,
-  DBUS_ERROR = -1,
-  NULL_PTR = -2,
-  UNKNOWN_TYPE = -3
+  ERROR_NONE = 1,
+  ERROR_DBUS = -1,
+  ERROR_NULL_PTR = -2,
+  ERROR_UNKNOWN_TYPE = -3
 
 } ErrorCodeType;
 
-typedef enum DbusMethods {
+typedef enum DBusMethods {
   Next = 1,
   OpenUri,
   Pause,
@@ -25,9 +25,9 @@ typedef enum DbusMethods {
   Seek,
   SetPosition,
   Stop
-} DbusMethodType;
+} DBusMethodType;
 
-typedef enum DbusProperties {
+typedef enum DBusProperties {
   CanControl,
   CanGoNext,
   CanGoPrevious,
@@ -43,7 +43,13 @@ typedef enum DbusProperties {
   Rate,
   Shuffle,
   Volume
-} DbusPropertyType;
+} DBusPropertyType;
+
+typedef enum DBusLoopStatus {
+  LoopStatusNone = 1,
+  LoopStatusTrack,
+  LoopStatusPlaylist
+} DBusLoopStatusType;
 
 class MprisMediaPlayer {
 public:
@@ -61,6 +67,14 @@ public:
   bool can_play();
   bool can_seek();
 
+  std::string get_loop_status(); // read & write
+  double get_maximum_rate();
+  void get_metadata(const std::string &service_name);
+  int64_t get_position();
+  double get_rate();
+  bool get_shuffle();  // read & write
+  double get_volume(); // read & write
+
   void next();
   void pause();
   void play();
@@ -70,10 +84,8 @@ public:
   // void set_position(track, int64_t position);
   void stop();
 
-  void get_metadata(const std::string &service_name);
-
-  std::string convert_dbus_method_type_to_string(DbusMethodType type);
-  std::string convert_dbus_property_type_to_string(DbusPropertyType type);
+  std::string convert_dbus_method_type_to_string(DBusMethodType type);
+  std::string convert_dbus_property_type_to_string(DBusPropertyType type);
 
   /* Test */
   void test_menu();
@@ -89,14 +101,19 @@ private:
                                          const std::string &path,
                                          const std::string &iface,
                                          const std::string &method);
-  int construct_new_dbus_msg(DBusMessage *&msg, DbusMethodType type);
-  int construct_new_dbus_msg(DBusMessage *&msg, DbusPropertyType type);
+  int construct_new_dbus_msg(DBusMessage *&msg, DBusMethodType type);
+  int construct_new_dbus_msg(DBusMessage *&msg, DBusPropertyType type);
 
   int send_dbus_msg(DBusMessage *&msg);
   int send_dbus_msg_with_reply(DBusMessage *&msg, DBusMessage *&reply,
                                DBusError &err);
 
-  void execute_base_method_func(DbusMethodType type);
+  void execute_base_method_func(DBusMethodType type);
+  int execute_base_property_func(DBusPropertyType type, DBusMessage *&reply);
+
+  bool property_func_return_bool(DBusPropertyType type);
+
+  int read_reply(DBusMessage *&reply, void *output);
 
   bool is_connected;
   DBusConnection *conn;
