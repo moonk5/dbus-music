@@ -51,6 +51,8 @@ typedef enum DBusLoopStatus {
   LoopStatusPlaylist
 } DBusLoopStatusType;
 
+typedef enum DBusGetSet { Getter = 1, Setter } DBusGetSetType;
+
 class MprisMediaPlayer {
 public:
   static const std::string PATH;
@@ -67,12 +69,15 @@ public:
   bool can_play();
   bool can_seek();
 
-  std::string get_loop_status(); // read & write
+  std::string get_loop_status();
+  void set_loop_status(DBusLoopStatusType loop_status);
+
   double get_maximum_rate();
   void get_metadata(const std::string &service_name);
   int64_t get_position();
   double get_rate();
-  bool get_shuffle();  // read & write
+  bool get_shuffle();
+  void set_shuffle(bool shuffle_on);
   double get_volume(); // read & write
 
   void next();
@@ -84,8 +89,9 @@ public:
   // void set_position(track, int64_t position);
   void stop();
 
-  std::string convert_dbus_method_type_to_string(DBusMethodType type);
-  std::string convert_dbus_property_type_to_string(DBusPropertyType type);
+  std::string convert_dbus_method_type_to_string(DBusMethodType method);
+  std::string convert_dbus_property_type_to_string(DBusPropertyType property);
+  std::string convert_dbus_loop_status(DBusLoopStatusType loopStatus);
 
   /* Test */
   void test_menu();
@@ -101,15 +107,22 @@ private:
                                          const std::string &path,
                                          const std::string &iface,
                                          const std::string &method);
-  int construct_new_dbus_msg(DBusMessage *&msg, DBusMethodType type);
-  int construct_new_dbus_msg(DBusMessage *&msg, DBusPropertyType type);
+  int construct_new_dbus_msg(DBusMessage *&msg, DBusMethodType method_type);
+  int construct_new_dbus_msg(DBusGetSetType getset_type,
+                             DBusPropertyType property_type, DBusMessage *&msg,
+                             void *set_value);
 
   int send_dbus_msg(DBusMessage *&msg);
   int send_dbus_msg_with_reply(DBusMessage *&msg, DBusMessage *&reply,
                                DBusError &err);
 
   void execute_base_method_func(DBusMethodType type);
-  int execute_base_property_func(DBusPropertyType type, DBusMessage *&reply);
+  int execute_base_property_func(DBusGetSetType getset,
+                                 DBusPropertyType property_type,
+                                 DBusMessage *&reply, void *set_value);
+
+  int get_base_property_func(DBusPropertyType type, DBusMessage *&reply);
+  int set_base_property_func(DBusPropertyType type, void *set_value);
 
   bool property_func_return_bool(DBusPropertyType type);
 
