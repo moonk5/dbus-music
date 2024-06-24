@@ -323,24 +323,14 @@ int MprisMediaPlayer::construct_new_dbus_msg(DBusGetSetType getset_type,
     const char *loop_status_cstr;
     switch (property_type) {
     case LoopStatus:
-
-      // std::string *loop_status_ptr = static_cast<std::string *>(set_value);
-      // std::string loop_status = *loop_status_ptr;
-      // const char *loop_status_cstr = loop_status.c_str();
-      // dbus_message_iter_append_basic(&sub_iter, DBUS_TYPE_STRING,
-      //                                &loop_status_cstr);
-      //
-      std::cout << "MOON TESTING ..." << std::endl;
       loop_type = static_cast<DBusLoopStatusType *>(set_value);
       std::cout << "loop_type: " << convert_dbus_loop_status(*loop_type);
-      std::cout << "MOON TESTING 2 ..." << std::endl;
       loop_status_cstr = convert_dbus_loop_status(*loop_type).c_str();
 
       dbus_message_iter_open_container(&args, DBUS_TYPE_VARIANT, "s",
                                        &sub_iter);
       dbus_message_iter_append_basic(&sub_iter, DBUS_TYPE_STRING,
                                      &loop_status_cstr);
-
       dbus_message_iter_close_container(&args, &sub_iter);
 
       break;
@@ -358,6 +348,7 @@ int MprisMediaPlayer::construct_new_dbus_msg(DBusGetSetType getset_type,
       dbus_message_iter_append_basic(&sub_iter, DBUS_TYPE_DOUBLE,
                                      static_cast<double *>(set_value));
       dbus_message_iter_close_container(&args, &sub_iter);
+
       break;
     default:
       return ERROR_DBUS;
@@ -579,104 +570,135 @@ void MprisMediaPlayer::set_loop_status(DBusLoopStatusType loop_status) {
 
   return;
 }
+/*
 
-void MprisMediaPlayer::get_metadata(const std::string &service_name) {
-  DBusError err;
-  DBusMessage *msg;
-  DBusMessageIter args;
+(<{'mpris:artUrl':
+<'https://i.scdn.co/image/ab67616d0000b27399cb9d3da88aa1747d72fae8'>,
+'mpris:length': <int64 249273000>, 'mpris:trackid': <objectpath
+'/org/ncspot/spotify/track/0R8JLNP107Hr7V7lL9oh13'>, 'xesam:album':
+<'ミラーチューン'>, 'xesam:albumArtist': <['ZUTOMAYO']>, 'xesam:artist':
+<['ZUTOMAYO']>, 'xesam:discNumber': <1>, 'xesam:title': <'ミラーチューン'>,
+'xesam:trackNumber': <1>, 'xesam:url':
+<'https://open.spotify.com/track/0R8JLNP107Hr7V7lL9oh13'>, 'xesam:userRating':
+<0.0>}>,)
+*/
+void MprisMediaPlayer::get_metadata() {
+
   DBusMessage *reply;
+  DBusMetadata metadata;
 
-  // Initialize the error
-  dbus_error_init(&err);
-
-  // Connect to the session bus
-  std::cout << "Connecting to the D-Bus session bus..." << std::endl;
-  if (!connect()) {
+  if (execute_base_property_func(Getter, Metadata, reply, &metadata) !=
+      ERROR_NONE)
     return;
-  }
-  std::cout << "Successfully connected to the D-Bus session bus." << std::endl;
 
-  // Create a new method call message
-  std::cout << "Creating a new method call message..." << std::endl;
-  msg = dbus_message_new_method_call(
-      service_name.c_str(),              // Target service
-      "/org/mpris/MediaPlayer2",         // Object to call on
-      "org.freedesktop.DBus.Properties", // Interface to call on
-      "Get"                              // Method name
-  );
-  if (!msg) {
-    std::cerr << "Message Null" << std::endl;
-    return;
-  }
-  std::cout << "Method call message created." << std::endl;
+  read_reply(reply, &metadata);
 
-  // Append arguments
-  const char *interface_name = "org.mpris.MediaPlayer2.Player";
-  const char *property_name = "Metadata";
-  dbus_message_append_args(msg, DBUS_TYPE_STRING, &interface_name,
-                           DBUS_TYPE_STRING, &property_name, DBUS_TYPE_INVALID);
-  std::cout << "Arguments appended to the message." << std::endl;
+  if (reply == nullptr)
+    dbus_message_unref(reply);
 
-  // Send the message and get a reply
-  std::cout << "Sending the message and waiting for a reply..." << std::endl;
-  reply = dbus_connection_send_with_reply_and_block(conn, msg, -1, &err);
-  if (dbus_error_is_set(&err)) {
-    log.error(get_dbus_error("Error in Send Message", &err));
-    dbus_message_unref(msg);
-    return;
-  }
-  if (!reply) {
-    std::cerr << "Reply Null" << std::endl;
-    dbus_message_unref(msg);
-    return;
-  }
-  std::cout << "Reply received." << std::endl;
+  // metadata.print();
 
-  // Read the reply
-  if (!dbus_message_iter_init(reply, &args)) {
-    std::cerr << "Message has no arguments!" << std::endl;
-  } else if (DBUS_TYPE_VARIANT != dbus_message_iter_get_arg_type(&args)) {
-    std::cerr << "Argument is not variant!" << std::endl;
-  } else {
-    DBusMessageIter variant_iter;
-    dbus_message_iter_recurse(&args, &variant_iter);
+  return;
 
-    if (DBUS_TYPE_ARRAY == dbus_message_iter_get_arg_type(&variant_iter)) {
-      DBusMessageIter dict_iter;
-      dbus_message_iter_recurse(&variant_iter, &dict_iter);
-
-      while (dbus_message_iter_get_arg_type(&dict_iter) != DBUS_TYPE_INVALID) {
-        if (DBUS_TYPE_DICT_ENTRY ==
-            dbus_message_iter_get_arg_type(&dict_iter)) {
-          DBusMessageIter dict_entry_iter;
-          dbus_message_iter_recurse(&dict_iter, &dict_entry_iter);
-
-          if (dbus_message_iter_get_arg_type(&dict_entry_iter) ==
-              DBUS_TYPE_STRING) {
-            char *key;
-            dbus_message_iter_get_basic(&dict_entry_iter, &key);
-            dbus_message_iter_next(&dict_entry_iter);
-
-            if (dbus_message_iter_get_arg_type(&dict_entry_iter) ==
-                DBUS_TYPE_VARIANT) {
-              DBusMessageIter value_iter;
-              dbus_message_iter_recurse(&dict_entry_iter, &value_iter);
-              std::cout << key << ": ";
-              print_dbus_variant(&value_iter);
-              std::cout << std::endl;
-            }
-          }
-        }
-        dbus_message_iter_next(&dict_iter);
-      }
-    }
-  }
-
-  // Clean up
-  dbus_message_unref(reply);
-  dbus_message_unref(msg);
-  dbus_connection_unref(conn);
-  std::cout << "Cleanup done." << std::endl;
+  // DBusError err;
+  // DBusMessage *msg;
+  // DBusMessageIter args;
+  // DBusMessage *reply;
+  //
+  // // Initialize the error
+  // dbus_error_init(&err);
+  //
+  // // Connect to the session bus
+  // std::cout << "Connecting to the D-Bus session bus..." << std::endl;
+  // if (!connect()) {
+  //   return;
+  // }
+  // std::cout << "Successfully connected to the D-Bus session bus." <<
+  // std::endl;
+  //
+  // // Create a new method call message
+  // std::cout << "Creating a new method call message..." << std::endl;
+  // msg = dbus_message_new_method_call(
+  //     session_name.c_str(),              // Target service
+  //     "/org/mpris/MediaPlayer2",         // Object to call on
+  //     "org.freedesktop.DBus.Properties", // Interface to call on
+  //     "Get"                              // Method name
+  // );
+  // if (!msg) {
+  //   std::cerr << "Message Null" << std::endl;
+  //   return;
+  // }
+  // std::cout << "Method call message created." << std::endl;
+  //
+  // // Append arguments
+  // const char *interface_name = "org.mpris.MediaPlayer2.Player";
+  // const char *property_name = "Metadata";
+  // dbus_message_append_args(msg, DBUS_TYPE_STRING, &interface_name,
+  //                          DBUS_TYPE_STRING, &property_name,
+  //                          DBUS_TYPE_INVALID);
+  // std::cout << "Arguments appended to the message." << std::endl;
+  //
+  // // Send the message and get a reply
+  // std::cout << "Sending the message and waiting for a reply..." << std::endl;
+  // reply = dbus_connection_send_with_reply_and_block(conn, msg, -1, &err);
+  // if (dbus_error_is_set(&err)) {
+  //   log.error(get_dbus_error("Error in Send Message", &err));
+  //   dbus_message_unref(msg);
+  //   return;
+  // }
+  // if (!reply) {
+  //   std::cerr << "Reply Null" << std::endl;
+  //   dbus_message_unref(msg);
+  //   return;
+  // }
+  // std::cout << "Reply received." << std::endl;
+  //
+  // // Read the reply
+  // if (!dbus_message_iter_init(reply, &args)) {
+  //   std::cerr << "Message has no arguments!" << std::endl;
+  // } else if (DBUS_TYPE_VARIANT != dbus_message_iter_get_arg_type(&args)) {
+  //   std::cerr << "Argument is not variant!" << std::endl;
+  // } else {
+  //   DBusMessageIter variant_iter;
+  //   dbus_message_iter_recurse(&args, &variant_iter);
+  //
+  //   if (DBUS_TYPE_ARRAY == dbus_message_iter_get_arg_type(&variant_iter)) {
+  //     DBusMessageIter dict_iter;
+  //     dbus_message_iter_recurse(&variant_iter, &dict_iter);
+  //
+  //     while (dbus_message_iter_get_arg_type(&dict_iter) != DBUS_TYPE_INVALID)
+  //     {
+  //       if (DBUS_TYPE_DICT_ENTRY ==
+  //           dbus_message_iter_get_arg_type(&dict_iter)) {
+  //         DBusMessageIter dict_entry_iter;
+  //         dbus_message_iter_recurse(&dict_iter, &dict_entry_iter);
+  //
+  //         if (dbus_message_iter_get_arg_type(&dict_entry_iter) ==
+  //             DBUS_TYPE_STRING) {
+  //           char *key;
+  //           dbus_message_iter_get_basic(&dict_entry_iter, &key);
+  //           dbus_message_iter_next(&dict_entry_iter);
+  //
+  //           if (dbus_message_iter_get_arg_type(&dict_entry_iter) ==
+  //               DBUS_TYPE_VARIANT) {
+  //             DBusMessageIter value_iter;
+  //             dbus_message_iter_recurse(&dict_entry_iter, &value_iter);
+  //             std::cout << key << ": ";
+  //             print_dbus_variant(&value_iter);
+  //             std::cout << std::endl;
+  //           }
+  //         }
+  //       }
+  //       dbus_message_iter_next(&dict_iter);
+  //     }
+  //   }
+  // }
+  //
+  // // Clean up
+  // dbus_message_unref(reply);
+  // dbus_message_unref(msg);
+  // dbus_connection_unref(conn);
+  // std::cout << "Cleanup done." << std::endl;
 }
 
 bool MprisMediaPlayer::get_shuffle() {
@@ -765,7 +787,8 @@ void MprisMediaPlayer::test_menu() {
       break;
     case 9:
       // set_shuffle(true);
-      set_loop_status(LoopStatusTrack);
+      //  set_loop_status(LoopStatusTrack);
+      get_metadata();
       break;
     case 0:
       run_menu = false;

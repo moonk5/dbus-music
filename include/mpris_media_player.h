@@ -53,6 +53,43 @@ typedef enum DBusLoopStatus {
 
 typedef enum DBusGetSet { Getter = 1, Setter } DBusGetSetType;
 
+struct DBusMetadata {
+  std::string art_url;
+  std::string url;
+  std::string track_id;
+  std::vector<std::string> album_artist;
+  std::vector<std::string> artist;
+  std::string title;
+  int32_t disk_number;
+  int32_t track_number;
+  int64_t length;
+  double user_rating;
+
+  void print() {
+    std::cout << "+-----------------------------------------" << std::endl;
+    std::cout << "| DBus Metadata" << std::endl;
+    std::cout << "| - Title: " << title << std::endl;
+    std::cout << "| - Artist: ";
+    for (std::string a : artist) {
+      std::cout << a << ", ";
+    }
+    std::cout << std::endl;
+    std::cout << "| - Album Artist: ";
+    for (std::string aa : album_artist) {
+      std::cout << aa << ", ";
+    }
+    std::cout << std::endl;
+    std::cout << "| - Track #: " << track_number << std::endl;
+    std::cout << "| - Disk #: " << disk_number << std::endl;
+    std::cout << "| - Length: " << length << std::endl;
+    std::cout << "| - Track ID: " << track_id << std::endl;
+    std::cout << "| - User Rating: " << user_rating << std::endl;
+    std::cout << "| - URL: " << url << std::endl;
+    std::cout << "| - Art URL: " << art_url << std::endl;
+    std::cout << "+-----------------------------------------" << std::endl;
+  }
+};
+
 class MprisMediaPlayer {
 public:
   static const std::string PATH;
@@ -73,7 +110,7 @@ public:
   void set_loop_status(DBusLoopStatusType loop_status);
 
   double get_maximum_rate();
-  void get_metadata(const std::string &service_name);
+  void get_metadata();
   int64_t get_position();
   double get_rate();
   bool get_shuffle();
@@ -120,9 +157,6 @@ private:
   int execute_base_property_func(DBusGetSetType getset,
                                  DBusPropertyType property_type,
                                  DBusMessage *&reply, void *set_value);
-
-  int get_base_property_func(DBusPropertyType type, DBusMessage *&reply);
-  int set_base_property_func(DBusPropertyType type, void *set_value);
 
   bool property_func_return_bool(DBusPropertyType type);
 
