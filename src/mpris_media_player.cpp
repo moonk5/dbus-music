@@ -1,6 +1,7 @@
 #include "mpris_media_player.h"
 #include "dbus/dbus-protocol.h"
 #include <bits/types/struct_sched_param.h>
+#include <cstdint>
 #include <new>
 #include <system_error>
 
@@ -477,6 +478,24 @@ bool MprisMediaPlayer::property_func_return_bool(DBusPropertyType type) {
   return output;
 }
 
+double MprisMediaPlayer::property_func_return_double(DBusPropertyType type) {
+  DBusMessage *reply;
+  double output = 0.0;
+
+  if (execute_base_property_func(Getter, type, reply, nullptr) != ERROR_NONE)
+    return output;
+
+  read_reply(reply, &output);
+
+  if (reply == nullptr)
+    dbus_message_unref(reply);
+
+  std::cout << convert_dbus_property_type_to_string(type) << ": " << output
+            << std::endl;
+
+  return output;
+}
+
 int MprisMediaPlayer::read_reply(DBusMessage *&reply, void *output) {
   DBusMessageIter args;
 
@@ -497,6 +516,8 @@ int MprisMediaPlayer::read_reply(DBusMessage *&reply, void *output) {
 
   switch (arg_type) {
   case DBUS_TYPE_BOOLEAN:
+  case DBUS_TYPE_INT64:
+  case DBUS_TYPE_DOUBLE:
     dbus_message_iter_get_basic(&variant_iter, output);
     break;
   case DBUS_TYPE_ARRAY:
@@ -525,8 +546,6 @@ int MprisMediaPlayer::read_reply(DBusMessage *&reply, void *output) {
         }
       }
       dbus_message_iter_next(&dict_iter);
-
-      break;
     }
   }
 
@@ -556,6 +575,66 @@ bool MprisMediaPlayer::can_pause() {
 bool MprisMediaPlayer::can_play() { return property_func_return_bool(CanPlay); }
 
 bool MprisMediaPlayer::can_seek() { return property_func_return_bool(CanSeek); }
+
+bool MprisMediaPlayer::get_shuffle() {
+  return property_func_return_bool(Shuffle);
+}
+
+void MprisMediaPlayer::set_shuffle(bool shuffle_on) {
+  DBusMessage *reply;
+  if (execute_base_property_func(Setter, Shuffle, reply, &shuffle_on) !=
+      ERROR_NONE)
+    return;
+
+  if (reply == nullptr)
+    dbus_message_unref(reply);
+
+  return;
+}
+double MprisMediaPlayer::get_maximum_rate() {
+  return property_func_return_double(MaximumRate);
+}
+
+double MprisMediaPlayer::get_minimum_rate() {
+  return property_func_return_double(MinimumRate);
+}
+
+double MprisMediaPlayer::get_rate() {
+  return property_func_return_double(Rate);
+}
+
+double MprisMediaPlayer::get_volume() {
+  return property_func_return_double(Volume);
+}
+
+void MprisMediaPlayer::set_volume(double volume) {
+  DBusMessage *reply;
+  if (execute_base_property_func(Setter, Volume, reply, &volume) != ERROR_NONE)
+    return;
+
+  if (reply == nullptr)
+    dbus_message_unref(reply);
+
+  return;
+}
+
+int64_t MprisMediaPlayer::get_position() {
+  DBusMessage *reply;
+  int64_t output = 0;
+
+  if (execute_base_property_func(Getter, Position, reply, nullptr) !=
+      ERROR_NONE)
+    return output;
+
+  read_reply(reply, &output);
+
+  if (reply == nullptr)
+    dbus_message_unref(reply);
+
+  std::cout << "position: " << output << std::endl;
+
+  return output;
+}
 
 std::string MprisMediaPlayer::get_loop_status() { return ""; }
 
@@ -597,134 +676,6 @@ void MprisMediaPlayer::get_metadata() {
     dbus_message_unref(reply);
 
   // metadata.print();
-
-  return;
-
-  // DBusError err;
-  // DBusMessage *msg;
-  // DBusMessageIter args;
-  // DBusMessage *reply;
-  //
-  // // Initialize the error
-  // dbus_error_init(&err);
-  //
-  // // Connect to the session bus
-  // std::cout << "Connecting to the D-Bus session bus..." << std::endl;
-  // if (!connect()) {
-  //   return;
-  // }
-  // std::cout << "Successfully connected to the D-Bus session bus." <<
-  // std::endl;
-  //
-  // // Create a new method call message
-  // std::cout << "Creating a new method call message..." << std::endl;
-  // msg = dbus_message_new_method_call(
-  //     session_name.c_str(),              // Target service
-  //     "/org/mpris/MediaPlayer2",         // Object to call on
-  //     "org.freedesktop.DBus.Properties", // Interface to call on
-  //     "Get"                              // Method name
-  // );
-  // if (!msg) {
-  //   std::cerr << "Message Null" << std::endl;
-  //   return;
-  // }
-  // std::cout << "Method call message created." << std::endl;
-  //
-  // // Append arguments
-  // const char *interface_name = "org.mpris.MediaPlayer2.Player";
-  // const char *property_name = "Metadata";
-  // dbus_message_append_args(msg, DBUS_TYPE_STRING, &interface_name,
-  //                          DBUS_TYPE_STRING, &property_name,
-  //                          DBUS_TYPE_INVALID);
-  // std::cout << "Arguments appended to the message." << std::endl;
-  //
-  // // Send the message and get a reply
-  // std::cout << "Sending the message and waiting for a reply..." << std::endl;
-  // reply = dbus_connection_send_with_reply_and_block(conn, msg, -1, &err);
-  // if (dbus_error_is_set(&err)) {
-  //   log.error(get_dbus_error("Error in Send Message", &err));
-  //   dbus_message_unref(msg);
-  //   return;
-  // }
-  // if (!reply) {
-  //   std::cerr << "Reply Null" << std::endl;
-  //   dbus_message_unref(msg);
-  //   return;
-  // }
-  // std::cout << "Reply received." << std::endl;
-  //
-  // // Read the reply
-  // if (!dbus_message_iter_init(reply, &args)) {
-  //   std::cerr << "Message has no arguments!" << std::endl;
-  // } else if (DBUS_TYPE_VARIANT != dbus_message_iter_get_arg_type(&args)) {
-  //   std::cerr << "Argument is not variant!" << std::endl;
-  // } else {
-  //   DBusMessageIter variant_iter;
-  //   dbus_message_iter_recurse(&args, &variant_iter);
-  //
-  //   if (DBUS_TYPE_ARRAY == dbus_message_iter_get_arg_type(&variant_iter)) {
-  //     DBusMessageIter dict_iter;
-  //     dbus_message_iter_recurse(&variant_iter, &dict_iter);
-  //
-  //     while (dbus_message_iter_get_arg_type(&dict_iter) != DBUS_TYPE_INVALID)
-  //     {
-  //       if (DBUS_TYPE_DICT_ENTRY ==
-  //           dbus_message_iter_get_arg_type(&dict_iter)) {
-  //         DBusMessageIter dict_entry_iter;
-  //         dbus_message_iter_recurse(&dict_iter, &dict_entry_iter);
-  //
-  //         if (dbus_message_iter_get_arg_type(&dict_entry_iter) ==
-  //             DBUS_TYPE_STRING) {
-  //           char *key;
-  //           dbus_message_iter_get_basic(&dict_entry_iter, &key);
-  //           dbus_message_iter_next(&dict_entry_iter);
-  //
-  //           if (dbus_message_iter_get_arg_type(&dict_entry_iter) ==
-  //               DBUS_TYPE_VARIANT) {
-  //             DBusMessageIter value_iter;
-  //             dbus_message_iter_recurse(&dict_entry_iter, &value_iter);
-  //             std::cout << key << ": ";
-  //             print_dbus_variant(&value_iter);
-  //             std::cout << std::endl;
-  //           }
-  //         }
-  //       }
-  //       dbus_message_iter_next(&dict_iter);
-  //     }
-  //   }
-  // }
-  //
-  // // Clean up
-  // dbus_message_unref(reply);
-  // dbus_message_unref(msg);
-  // dbus_connection_unref(conn);
-  // std::cout << "Cleanup done." << std::endl;
-}
-
-bool MprisMediaPlayer::get_shuffle() {
-  DBusMessage *reply;
-  bool output = false;
-
-  if (execute_base_property_func(Getter, Shuffle, reply, nullptr) != ERROR_NONE)
-    return output;
-
-  read_reply(reply, &output);
-
-  if (reply == nullptr)
-    dbus_message_unref(reply);
-
-  std::cout << "shuffle: " << ((output) ? "true" : "false") << std::endl;
-  return output;
-}
-
-void MprisMediaPlayer::set_shuffle(bool shuffle_on) {
-  DBusMessage *reply;
-  if (execute_base_property_func(Setter, Shuffle, reply, &shuffle_on) !=
-      ERROR_NONE)
-    return;
-
-  if (reply == nullptr)
-    dbus_message_unref(reply);
 
   return;
 }
@@ -786,9 +737,9 @@ void MprisMediaPlayer::test_menu() {
       get_shuffle();
       break;
     case 9:
-      // set_shuffle(true);
-      //  set_loop_status(LoopStatusTrack);
-      get_metadata();
+      get_volume();
+      set_volume(0.8);
+      get_volume();
       break;
     case 0:
       run_menu = false;

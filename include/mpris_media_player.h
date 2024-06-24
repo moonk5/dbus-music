@@ -106,16 +106,21 @@ public:
   bool can_play();
   bool can_seek();
 
+  bool get_shuffle();
+  void set_shuffle(bool shuffle_on);
+
+  double get_maximum_rate();
+  double get_minimum_rate();
+  double get_rate();
+  double get_volume();
+  void set_volume(double volume);
+
+  int64_t get_position();
+
   std::string get_loop_status();
   void set_loop_status(DBusLoopStatusType loop_status);
 
-  double get_maximum_rate();
   void get_metadata();
-  int64_t get_position();
-  double get_rate();
-  bool get_shuffle();
-  void set_shuffle(bool shuffle_on);
-  double get_volume(); // read & write
 
   void next();
   void pause();
@@ -159,6 +164,7 @@ private:
                                  DBusMessage *&reply, void *set_value);
 
   bool property_func_return_bool(DBusPropertyType type);
+  double property_func_return_double(DBusPropertyType type);
 
   int read_reply(DBusMessage *&reply, void *output);
 

@@ -2531,9 +2531,13 @@ get_level_color	include/spdlog/sinks/qt_sinks.h	/^    QTextCharFormat &get_level
 get_locale	include/spdlog/fmt/bundled/chrono.h	/^  get_locale(bool localized, locale_ref loc) : has_locale_(localized) {$/;"	f	class:detail::get_locale
 get_locale	include/spdlog/fmt/bundled/chrono.h	/^class get_locale {$/;"	c	namespace:detail
 get_loop_status	src/mpris_media_player.cpp	/^std::string MprisMediaPlayer::get_loop_status() { return ""; }$/;"	f	class:MprisMediaPlayer	typeref:typename:std::string
+get_maximum_rate	src/mpris_media_player.cpp	/^double MprisMediaPlayer::get_maximum_rate() {$/;"	f	class:MprisMediaPlayer	typeref:typename:double
 get_metadata	src/mpris_media_player.cpp	/^void MprisMediaPlayer::get_metadata() {$/;"	f	class:MprisMediaPlayer	typeref:typename:void
 get_milliseconds	include/spdlog/fmt/bundled/chrono.h	/^inline auto get_milliseconds(std::chrono::duration<Rep, Period> d)$/;"	f	namespace:detail	typeref:typename:std::chrono::duration<Rep,std::milli>
+get_minimum_rate	src/mpris_media_player.cpp	/^double MprisMediaPlayer::get_minimum_rate() {$/;"	f	class:MprisMediaPlayer	typeref:typename:double
 get_path_string	include/spdlog/fmt/bundled/std.h	/^auto get_path_string(const std::filesystem::path& p,$/;"	f	namespace:detail	typeref:typename:auto
+get_position	src/mpris_media_player.cpp	/^int64_t MprisMediaPlayer::get_position() {$/;"	f	class:MprisMediaPlayer	typeref:typename:int64_t
+get_rate	src/mpris_media_player.cpp	/^double MprisMediaPlayer::get_rate() {$/;"	f	class:MprisMediaPlayer	typeref:typename:double
 get_shuffle	src/mpris_media_player.cpp	/^bool MprisMediaPlayer::get_shuffle() {$/;"	f	class:MprisMediaPlayer	typeref:typename:bool
 get_significand_size	include/spdlog/fmt/bundled/format.h	/^constexpr auto get_significand_size(const big_decimal_fp& f) -> int {$/;"	f	namespace:detail	typeref:typename:int
 get_significand_size	include/spdlog/fmt/bundled/format.h	/^inline auto get_significand_size(const dragonbox::decimal_fp<T>& f) -> int {$/;"	f	namespace:detail	typeref:typename:int
@@ -2544,6 +2548,7 @@ get_type	include/spdlog/fmt/bundled/compile.h	/^using get_type = typename get_ty
 get_type_impl	include/spdlog/fmt/bundled/compile.h	/^template <int N, typename... Args> struct get_type_impl<N, type_list<Args...>> {$/;"	s	namespace:detail
 get_types	include/spdlog/fmt/bundled/args.h	/^  auto get_types() const -> unsigned long long {$/;"	f	class:dynamic_format_arg_store	typeref:typename:unsigned long long
 get_units	include/spdlog/fmt/bundled/chrono.h	/^FMT_CONSTEXPR inline auto get_units() -> const char* {$/;"	f	namespace:detail	typeref:typename:const char *
+get_volume	src/mpris_media_player.cpp	/^double MprisMediaPlayer::get_volume() {$/;"	f	class:MprisMediaPlayer	typeref:typename:double
 getenv	include/spdlog/details/os-inl.h	/^std::string SPDLOG_INLINE getenv(const char *field) {$/;"	f	namespace:spdlog::details::os	typeref:typename:std::string SPDLOG_INLINE
 getter	include/spdlog/fmt/bundled/ranges.h	/^    struct getter : T {$/;"	s	function:formatter::format
 ghost_white	include/spdlog/fmt/bundled/color.h	/^  ghost_white = 0xF8F8FF,              \/\/ rgb(248,248,255)$/;"	e	enum:color
@@ -3826,6 +3831,7 @@ process_token_t	include/spdlog/sinks/win_eventlog_sink.h	/^        struct proces
 produce_topic	include/spdlog/sinks/kafka_sink.h	/^    std::string produce_topic;$/;"	m	struct:spdlog::sinks::kafka_sink_config	typeref:typename:std::string
 producer_	include/spdlog/sinks/kafka_sink.h	/^    std::unique_ptr<RdKafka::Producer> producer_ = nullptr;$/;"	m	class:spdlog::sinks::kafka_sink	typeref:typename:std::unique_ptr<RdKafka::Producer>
 property_func_return_bool	src/mpris_media_player.cpp	/^bool MprisMediaPlayer::property_func_return_bool(DBusPropertyType type) {$/;"	f	class:MprisMediaPlayer	typeref:typename:bool
+property_func_return_double	src/mpris_media_player.cpp	/^double MprisMediaPlayer::property_func_return_double(DBusPropertyType type) {$/;"	f	class:MprisMediaPlayer	typeref:typename:double
 pt	include/spdlog/fmt/bundled/printf.h	/^  using pt = presentation_type;$/;"	t	function:detail::parse_printf_presentation_type	typeref:typename:presentation_type
 ptr	include/spdlog/fmt/bundled/format.h	/^auto ptr(const std::unique_ptr<T, Deleter>& p) -> const void* {$/;"	f	typeref:typename:const void *
 ptr	include/spdlog/fmt/bundled/format.h	/^template <typename T> auto ptr(T p) -> const void* {$/;"	f	typeref:typename:const void *
