@@ -4080,6 +4080,7 @@ set_separator	include/spdlog/fmt/bundled/ranges.h	/^  FMT_CONSTEXPR void set_sep
 set_shuffle	src/mpris_media_player.cpp	/^void MprisMediaPlayer::set_shuffle(bool shuffle_on) {$/;"	f	class:MprisMediaPlayer	typeref:typename:void
 set_sinks	include/spdlog/sinks/dist_sink.h	/^    void set_sinks(std::vector<std::shared_ptr<sink>> sinks) {$/;"	f	class:spdlog::sinks::dist_sink	typeref:typename:void
 set_tp	include/spdlog/details/registry-inl.h	/^SPDLOG_INLINE void registry::set_tp(std::shared_ptr<thread_pool> tp) {$/;"	f	class:spdlog::details::registry	typeref:typename:SPDLOG_INLINE void
+set_volume	src/mpris_media_player.cpp	/^void MprisMediaPlayer::set_volume(double volume) {$/;"	f	class:MprisMediaPlayer	typeref:typename:void
 shift_amount	include/spdlog/fmt/bundled/format-inl.h	/^  int shift_amount;$/;"	m	struct:detail::dragonbox::__anondc4b9cc20108	typeref:typename:int
 short_filename_formatter	include/spdlog/pattern_formatter-inl.h	/^    explicit short_filename_formatter(padding_info padinfo)$/;"	f	class:spdlog::details::short_filename_formatter
 short_filename_formatter	include/spdlog/pattern_formatter-inl.h	/^class short_filename_formatter final : public flag_formatter {$/;"	c	namespace:spdlog::details

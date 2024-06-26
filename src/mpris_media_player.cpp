@@ -462,19 +462,20 @@ int MprisMediaPlayer::execute_base_property_func(DBusGetSetType getset,
 }
 
 bool MprisMediaPlayer::property_func_return_bool(DBusPropertyType type) {
-  DBusMessage *reply;
+  DBusMessage *reply = nullptr;
   bool output = false;
 
   if (execute_base_property_func(Getter, type, reply, nullptr) != ERROR_NONE)
     return output;
 
-  read_reply(reply, &output);
-
-  if (reply == nullptr)
+  if (reply != nullptr) {
+    if (read_reply(reply, &output) == ERROR_NONE) {
+      std::cout << convert_dbus_property_type_to_string(type) << ": "
+                << ((output) ? "true" : "false") << std::endl;
+    }
     dbus_message_unref(reply);
+  }
 
-  std::cout << convert_dbus_property_type_to_string(type) << ": "
-            << ((output) ? "true" : "false") << std::endl;
   return output;
 }
 
@@ -485,27 +486,27 @@ double MprisMediaPlayer::property_func_return_double(DBusPropertyType type) {
   if (execute_base_property_func(Getter, type, reply, nullptr) != ERROR_NONE)
     return output;
 
-  read_reply(reply, &output);
-
-  if (reply == nullptr)
+  if (reply != nullptr) {
+    if (read_reply(reply, &output) == ERROR_NONE) {
+      std::cout << convert_dbus_property_type_to_string(type) << ": " << output
+                << std::endl;
+    }
     dbus_message_unref(reply);
-
-  std::cout << convert_dbus_property_type_to_string(type) << ": " << output
-            << std::endl;
+  }
 
   return output;
 }
 
-int MprisMediaPlayer::read_reply(DBusMessage *&reply, void *output) {
+int MprisMediaPlayer::read_reply(DBusMessage *reply, void *output) {
   DBusMessageIter args;
 
   if (!dbus_message_iter_init(reply, &args)) {
-    std::cout << "Message has no arguments!" << std::endl;
+    std::cerr << "Message has no arguments!" << std::endl;
     return ERROR_DBUS;
   }
 
   if (DBUS_TYPE_VARIANT != dbus_message_iter_get_arg_type(&args)) {
-    std::cout << "Argument is not variant!" << std::endl;
+    std::cerr << "Argument is not variant!" << std::endl;
     return ERROR_DBUS;
   }
 
@@ -518,7 +519,12 @@ int MprisMediaPlayer::read_reply(DBusMessage *&reply, void *output) {
   case DBUS_TYPE_BOOLEAN:
   case DBUS_TYPE_INT64:
   case DBUS_TYPE_DOUBLE:
-    dbus_message_iter_get_basic(&variant_iter, output);
+    dbus_message_iter_get_basic(&variant_iter, &output);
+    break;
+  case DBUS_TYPE_STRING:
+    const char *value;
+    dbus_message_iter_get_basic(&variant_iter, &value);
+    *static_cast<std::string *>(output) = value;
     break;
   case DBUS_TYPE_ARRAY:
     DBusMessageIter dict_iter;
@@ -586,7 +592,7 @@ void MprisMediaPlayer::set_shuffle(bool shuffle_on) {
       ERROR_NONE)
     return;
 
-  if (reply == nullptr)
+  if (reply != nullptr)
     dbus_message_unref(reply);
 
   return;
@@ -612,7 +618,7 @@ void MprisMediaPlayer::set_volume(double volume) {
   if (execute_base_property_func(Setter, Volume, reply, &volume) != ERROR_NONE)
     return;
 
-  if (reply == nullptr)
+  if (reply != nullptr)
     dbus_message_unref(reply);
 
   return;
@@ -628,7 +634,7 @@ int64_t MprisMediaPlayer::get_position() {
 
   read_reply(reply, &output);
 
-  if (reply == nullptr)
+  if (reply != nullptr)
     dbus_message_unref(reply);
 
   std::cout << "position: " << output << std::endl;
@@ -636,7 +642,23 @@ int64_t MprisMediaPlayer::get_position() {
   return output;
 }
 
-std::string MprisMediaPlayer::get_loop_status() { return ""; }
+std::string MprisMediaPlayer::get_loop_status() {
+  DBusMessage *reply;
+  std::string output;
+
+  if (execute_base_property_func(Getter, LoopStatus, reply, nullptr) !=
+      ERROR_NONE)
+    return output;
+
+  read_reply(reply, &output);
+
+  if (reply != nullptr)
+    dbus_message_unref(reply);
+
+  std::cout << "loop status: " << output.c_str() << std::endl;
+
+  return output;
+}
 
 void MprisMediaPlayer::set_loop_status(DBusLoopStatusType loop_status) {
   DBusMessage *reply;
@@ -644,7 +666,7 @@ void MprisMediaPlayer::set_loop_status(DBusLoopStatusType loop_status) {
       ERROR_NONE)
     return;
 
-  if (reply == nullptr)
+  if (reply != nullptr)
     dbus_message_unref(reply);
 
   return;
@@ -672,7 +694,7 @@ void MprisMediaPlayer::get_metadata() {
 
   read_reply(reply, &metadata);
 
-  if (reply == nullptr)
+  if (reply != nullptr)
     dbus_message_unref(reply);
 
   // metadata.print();
@@ -737,9 +759,7 @@ void MprisMediaPlayer::test_menu() {
       get_shuffle();
       break;
     case 9:
-      get_volume();
-      set_volume(0.8);
-      get_volume();
+      get_loop_status();
       break;
     case 0:
       run_menu = false;

@@ -166,7 +166,7 @@ private:
   bool property_func_return_bool(DBusPropertyType type);
   double property_func_return_double(DBusPropertyType type);
 
-  int read_reply(DBusMessage *&reply, void *output);
+  int read_reply(DBusMessage *reply, void *output);
 
   bool is_connected;
   DBusConnection *conn;
