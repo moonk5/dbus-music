@@ -497,6 +497,98 @@ double MprisMediaPlayer::property_func_return_double(DBusPropertyType type) {
   return output;
 }
 
+void MprisMediaPlayer::fill_in_metadata(DBusMetadata &metadata, std::string key,
+                                        DBusMessageIter *value_iter) {
+
+  DBusMessageIter sub_iter;
+
+  // typedef enum Key {
+  //    ArtUrl = 1,
+  //    Url,
+  //    TrackId,
+  //    AlbumArtist,
+  //    Artist,
+  //    Album,
+  //    Title,
+  //    DiscNumber,
+  //    TrackNumber,
+  //    Length,
+  //    UserRating,
+  //    Unknown
+  //  } KeyType;
+  //
+
+  switch (metadata.get_keytype(key)) {
+  case DBusMetadata::ArtUrl:
+    char *artUrl;
+    dbus_message_iter_get_basic(value_iter, &artUrl);
+    metadata.art_url = artUrl;
+    break;
+  case DBusMetadata::Url:
+    char *url;
+    dbus_message_iter_get_basic(value_iter, &url);
+    metadata.url = url;
+    break;
+  case DBusMetadata::TrackId:
+    char *trackId;
+    dbus_message_iter_get_basic(value_iter, &trackId);
+    metadata.track_id = trackId;
+    break;
+  case DBusMetadata::AlbumArtist:
+    dbus_message_iter_recurse(value_iter, &sub_iter);
+
+    while (dbus_message_iter_get_arg_type(&sub_iter) != DBUS_TYPE_INVALID) {
+      char *albumArtist;
+      dbus_message_iter_get_basic(&sub_iter, &albumArtist);
+      metadata.album_artist.push_back(albumArtist);
+
+      dbus_message_iter_next(&sub_iter);
+    }
+    break;
+  case DBusMetadata::Artist:
+    dbus_message_iter_recurse(value_iter, &sub_iter);
+
+    while (dbus_message_iter_get_arg_type(&sub_iter) != DBUS_TYPE_INVALID) {
+      char *artist;
+      dbus_message_iter_get_basic(&sub_iter, &artist);
+      metadata.artist.push_back(artist);
+
+      dbus_message_iter_next(&sub_iter);
+    }
+    break;
+  case DBusMetadata::Album:
+    char *album;
+    dbus_message_iter_get_basic(value_iter, &album);
+    metadata.album = album;
+    break;
+  case DBusMetadata::Title:
+    char *title;
+    dbus_message_iter_get_basic(value_iter, &title);
+    metadata.title = title;
+    break;
+  case DBusMetadata::DiscNumber:
+    int32_t discNum;
+    dbus_message_iter_get_basic(value_iter, &discNum);
+    metadata.disc_number = discNum;
+    break;
+  case DBusMetadata::TrackNumber:
+    int32_t trackNum;
+    dbus_message_iter_get_basic(value_iter, &trackNum);
+    metadata.track_number = trackNum;
+    break;
+  case DBusMetadata::Length:
+    int64_t length;
+    dbus_message_iter_get_basic(value_iter, &length);
+    metadata.length = length;
+    break;
+  case DBusMetadata::UserRating:
+    double userRating;
+    dbus_message_iter_get_basic(value_iter, &userRating);
+    metadata.user_rating = userRating;
+    break;
+  }
+}
+
 int MprisMediaPlayer::read_reply(DBusMessage *reply, void *output) {
   DBusMessageIter args;
 
@@ -527,10 +619,13 @@ int MprisMediaPlayer::read_reply(DBusMessage *reply, void *output) {
     *static_cast<std::string *>(output) = value;
     break;
   case DBUS_TYPE_ARRAY:
+    DBusMetadata meta;
+
     DBusMessageIter dict_iter;
     dbus_message_iter_recurse(&variant_iter, &dict_iter);
 
     while (dbus_message_iter_get_arg_type(&dict_iter) != DBUS_TYPE_INVALID) {
+
       if (DBUS_TYPE_DICT_ENTRY == dbus_message_iter_get_arg_type(&dict_iter)) {
         DBusMessageIter dict_entry_iter;
         dbus_message_iter_recurse(&dict_iter, &dict_entry_iter);
@@ -545,14 +640,15 @@ int MprisMediaPlayer::read_reply(DBusMessage *reply, void *output) {
               DBUS_TYPE_VARIANT) {
             DBusMessageIter value_iter;
             dbus_message_iter_recurse(&dict_entry_iter, &value_iter);
-            std::cout << key << ": ";
-            print_dbus_variant(&value_iter);
-            std::cout << std::endl;
+
+            fill_in_metadata(meta, key, &value_iter);
           }
         }
       }
       dbus_message_iter_next(&dict_iter);
     }
+
+    *static_cast<DBusMetadata *>(output) = meta;
   }
 
   return ERROR_NONE;
@@ -671,24 +767,11 @@ void MprisMediaPlayer::set_loop_status(DBusLoopStatusType loop_status) {
 
   return;
 }
-/*
 
-(<{'mpris:artUrl':
-<'https://i.scdn.co/image/ab67616d0000b27399cb9d3da88aa1747d72fae8'>,
-'mpris:length': <int64 249273000>, 'mpris:trackid': <objectpath
-'/org/ncspot/spotify/track/0R8JLNP107Hr7V7lL9oh13'>, 'xesam:album':
-<'ミラーチューン'>, 'xesam:albumArtist': <['ZUTOMAYO']>, 'xesam:artist':
-<['ZUTOMAYO']>, 'xesam:discNumber': <1>, 'xesam:title': <'ミラーチューン'>,
-'xesam:trackNumber': <1>, 'xesam:url':
-<'https://open.spotify.com/track/0R8JLNP107Hr7V7lL9oh13'>, 'xesam:userRating':
-<0.0>}>,)
-*/
-void MprisMediaPlayer::get_metadata() {
-
+void MprisMediaPlayer::get_metadata(DBusMetadata &metadata) {
   DBusMessage *reply;
-  DBusMetadata metadata;
 
-  if (execute_base_property_func(Getter, Metadata, reply, &metadata) !=
+  if (execute_base_property_func(Getter, Metadata, reply, nullptr) !=
       ERROR_NONE)
     return;
 
@@ -696,8 +779,6 @@ void MprisMediaPlayer::get_metadata() {
 
   if (reply != nullptr)
     dbus_message_unref(reply);
-
-  // metadata.print();
 
   return;
 }
@@ -713,6 +794,7 @@ void MprisMediaPlayer::stop() { execute_base_method_func(Stop); }
 
 void MprisMediaPlayer::test_menu() {
 
+  DBusMetadata metadata;
   bool run_menu = true;
   int choice;
 
@@ -759,7 +841,8 @@ void MprisMediaPlayer::test_menu() {
       get_shuffle();
       break;
     case 9:
-      get_loop_status();
+      get_metadata(metadata);
+      metadata.print();
       break;
     case 0:
       run_menu = false;

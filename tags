@@ -2136,6 +2136,7 @@ filesize	include/spdlog/details/os-inl.h	/^SPDLOG_INLINE size_t filesize(FILE *f
 fill	include/spdlog/fmt/bundled/core.h	/^  detail::fill_t<Char> fill;$/;"	m	struct:format_specs	typeref:typename:detail::fill_t<Char>
 fill	include/spdlog/fmt/bundled/format.h	/^FMT_NOINLINE FMT_CONSTEXPR auto fill(OutputIt it, size_t n,$/;"	f	namespace:detail	typeref:typename:OutputIt
 fill_	include/spdlog/fmt/bundled/format.h	/^  detail::fill_t<char> fill_;$/;"	m	struct:nested_formatter	typeref:typename:detail::fill_t<char>
+fill_in_metadata	src/mpris_media_player.cpp	/^void MprisMediaPlayer::fill_in_metadata(DBusMetadata &metadata, std::string key,$/;"	f	class:MprisMediaPlayer	typeref:typename:void
 fill_n	include/spdlog/fmt/bundled/format.h	/^FMT_CONSTEXPR auto fill_n(OutputIt out, Size count, const T& value)$/;"	f	namespace:detail	typeref:typename:OutputIt
 fill_n	include/spdlog/fmt/bundled/format.h	/^FMT_CONSTEXPR20 auto fill_n(T* out, Size count, char value) -> T* {$/;"	f	namespace:detail	typeref:typename:T *
 fill_t	include/spdlog/fmt/bundled/core.h	/^template <typename Char> struct fill_t {$/;"	s	namespace:detail
@@ -2530,7 +2531,7 @@ get_level	include/spdlog/spdlog-inl.h	/^SPDLOG_INLINE level::level_enum get_leve
 get_level_color	include/spdlog/sinks/qt_sinks.h	/^    QTextCharFormat &get_level_color(level::level_enum color_level) {$/;"	f	class:spdlog::sinks::qt_color_sink	typeref:typename:QTextCharFormat &
 get_locale	include/spdlog/fmt/bundled/chrono.h	/^  get_locale(bool localized, locale_ref loc) : has_locale_(localized) {$/;"	f	class:detail::get_locale
 get_locale	include/spdlog/fmt/bundled/chrono.h	/^class get_locale {$/;"	c	namespace:detail
-get_loop_status	src/mpris_media_player.cpp	/^std::string MprisMediaPlayer::get_loop_status() { return ""; }$/;"	f	class:MprisMediaPlayer	typeref:typename:std::string
+get_loop_status	src/mpris_media_player.cpp	/^std::string MprisMediaPlayer::get_loop_status() {$/;"	f	class:MprisMediaPlayer	typeref:typename:std::string
 get_maximum_rate	src/mpris_media_player.cpp	/^double MprisMediaPlayer::get_maximum_rate() {$/;"	f	class:MprisMediaPlayer	typeref:typename:double
 get_metadata	src/mpris_media_player.cpp	/^void MprisMediaPlayer::get_metadata() {$/;"	f	class:MprisMediaPlayer	typeref:typename:void
 get_milliseconds	include/spdlog/fmt/bundled/chrono.h	/^inline auto get_milliseconds(std::chrono::duration<Rep, Period> d)$/;"	f	namespace:detail	typeref:typename:std::chrono::duration<Rep,std::milli>
@@ -3902,7 +3903,7 @@ range_reference_type	include/spdlog/fmt/bundled/ranges.h	/^using range_reference
 range_reference_type_impl	include/spdlog/fmt/bundled/ranges.h	/^template <typename R> struct range_reference_type_impl {$/;"	s	namespace:detail
 range_reference_type_impl	include/spdlog/fmt/bundled/ranges.h	/^template <typename T, std::size_t N> struct range_reference_type_impl<T[N]> {$/;"	s	namespace:detail
 range_type	include/spdlog/fmt/bundled/ranges.h	/^  using range_type = detail::maybe_const_range<R>;$/;"	t	struct:detail::range_default_formatter	typeref:typename:detail::maybe_const_range<R>
-read_reply	src/mpris_media_player.cpp	/^int MprisMediaPlayer::read_reply(DBusMessage *&reply, void *output) {$/;"	f	class:MprisMediaPlayer	typeref:typename:int
+read_reply	src/mpris_media_player.cpp	/^int MprisMediaPlayer::read_reply(DBusMessage *reply, void *output) {$/;"	f	class:MprisMediaPlayer	typeref:typename:int
 rebecca_purple	include/spdlog/fmt/bundled/color.h	/^  rebecca_purple = 0x663399,           \/\/ rgb(102,51,153)$/;"	e	enum:color
 rebuild_cache	build/Makefile	/^rebuild_cache:$/;"	t
 rebuild_cache/fast	build/Makefile	/^rebuild_cache\/fast: rebuild_cache$/;"	t
