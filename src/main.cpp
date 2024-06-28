@@ -10,7 +10,7 @@
 int main(void) {
 
   const std::string service_name =
-      "org.mpris.MediaPlayer2.ncspot.instance413844";
+      "org.mpris.MediaPlayer2.ncspot.instance315730";
   // const std::string service_name =
   //     "org.mpris.MediaPlayer2.firefox.instance_1_20";
 

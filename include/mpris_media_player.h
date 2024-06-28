@@ -52,8 +52,6 @@ typedef enum DBusLoopStatus {
   LoopStatusPlaylist
 } DBusLoopStatusType;
 
-typedef enum DBusGetSet { Getter = 1, Setter } DBusGetSetType;
-
 struct DBusMetadata {
   typedef enum Key {
     ArtUrl = 1,
@@ -191,19 +189,18 @@ private:
                                          const std::string &path,
                                          const std::string &iface,
                                          const std::string &method);
-  int construct_new_dbus_msg(DBusMessage *&msg, DBusMethodType method_type);
-  int construct_new_dbus_msg(DBusGetSetType getset_type,
-                             DBusPropertyType property_type, DBusMessage *&msg,
-                             void *set_value);
+  int construct_new_dbus_msg(DBusMethodType type, DBusMessage *&msg,
+                             void *set_value = nullptr);
+  int construct_new_dbus_msg(DBusPropertyType type, DBusMessage *&msg,
+                             void *set_value = nullptr);
 
   int send_dbus_msg(DBusMessage *&msg);
   int send_dbus_msg_with_reply(DBusMessage *&msg, DBusMessage *&reply,
                                DBusError &err);
 
-  void execute_base_method_func(DBusMethodType type);
-  int execute_base_property_func(DBusGetSetType getset,
-                                 DBusPropertyType property_type,
-                                 DBusMessage *&reply, void *set_value);
+  void execute_base_method_func(DBusMethodType type, void *set_value = nullptr);
+  int execute_base_property_func(DBusPropertyType type, DBusMessage *&reply,
+                                 void *set_value = nullptr);
 
   bool property_func_return_bool(DBusPropertyType type);
   double property_func_return_double(DBusPropertyType type);
