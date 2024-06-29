@@ -477,3 +477,19 @@
 [2024-06-28 15:32:50.317] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance315730) is connected
 [2024-06-28 15:32:51.882] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance315730) is connected
 [2024-06-28 15:35:35.489] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance315730) is connected
+[2024-06-28 15:38:56.530] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance315730) is connected
+[2024-06-28 15:38:57.244] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance315730) is connected
+[2024-06-28 15:38:57.615] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance315730) is connected
+[2024-06-28 15:38:57.978] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance315730) is connected
+[2024-06-28 15:38:58.341] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance315730) is connected
+[2024-06-28 15:38:58.727] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance315730) is connected
+[2024-06-28 15:38:59.290] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance315730) is connected
+[2024-06-28 15:39:04.862] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance315730) is connected
+[2024-06-28 15:39:05.482] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance315730) is connected
+[2024-06-28 15:39:06.598] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance315730) is connected
+[2024-06-28 15:39:11.517] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance315730) is connected
+[2024-06-28 15:39:23.423] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance315730) is connected
+[2024-06-28 16:29:53.678] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance315730) is connected
+[2024-06-28 16:30:18.703] [MprisMediaPlayer] [error] [DBUS ERROR] Error in Send Message: org.freedesktop.DBus.Error.NoReply - Did not receive a reply. Possible causes include: the remote application did not send a reply, the message bus security policy blocked the reply, the reply timeout expired, or the network connection was broken.
+[2024-06-28 16:32:00.376] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance315730) is connected
+[2024-06-28 16:34:12.132] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance315730) is connected

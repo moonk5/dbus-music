@@ -210,6 +210,8 @@ private:
 
   int read_reply(DBusMessage *reply, void *output);
 
+  int get_session_list(std::vector<std::string> &sessions);
+
   bool is_connected;
   DBusConnection *conn;
 

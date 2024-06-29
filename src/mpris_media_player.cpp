@@ -1,6 +1,7 @@
 #include "mpris_media_player.h"
 #include "dbus/dbus-protocol.h"
 #include <bits/types/struct_sched_param.h>
+#include <system_error>
 
 const std::string MprisMediaPlayer::PATH = "/org/mpris/MediaPlayer2";
 
@@ -607,6 +608,24 @@ int MprisMediaPlayer::read_reply(DBusMessage *reply, void *output) {
   }
 
   if (DBUS_TYPE_VARIANT != dbus_message_iter_get_arg_type(&args)) {
+
+    // NOTE: special case for list of session names
+    if (DBUS_TYPE_ARRAY == dbus_message_iter_get_arg_type(&args)) {
+      DBusMessageIter sub_iter;
+      char *str;
+
+      dbus_message_iter_recurse(&args, &sub_iter);
+      while (dbus_message_iter_get_arg_type(&sub_iter) == DBUS_TYPE_STRING) {
+        dbus_message_iter_get_basic(&sub_iter, &str);
+
+        std::cout << str << ", ";
+        // result.push_back(str);
+        dbus_message_iter_next(&sub_iter);
+      }
+      std::cout << std::endl;
+      return ERROR_NONE;
+    }
+
     std::cerr << "Argument is not variant!" << std::endl;
     return ERROR_DBUS;
   }
@@ -824,6 +843,7 @@ void MprisMediaPlayer::stop() { execute_base_method_func(Stop); }
 void MprisMediaPlayer::test_menu() {
 
   DBusMetadata metadata;
+  std::vector<std::string> sessions;
   bool run_menu = true;
   int choice;
 
@@ -868,7 +888,8 @@ void MprisMediaPlayer::test_menu() {
       break;
     case 8:
       // set_shuffle(true);
-      seek(-10000000);
+      // seek(-10000000);
+      get_session_list(sessions);
       break;
     case 9:
       get_metadata(metadata);
@@ -881,4 +902,47 @@ void MprisMediaPlayer::test_menu() {
       break;
     }
   }
+}
+
+int MprisMediaPlayer::get_session_list(std::vector<std::string> &sessions) {
+  DBusMessage *msg;
+  DBusMessage *reply;
+  DBusError err;
+  int output = ERROR_NONE;
+
+  std::string session = "org.freedesktop.DBus";
+  std::string path = "/org/freedesktop/DBus";
+  std::string iface = "org.freedesktop.DBus";
+  std::string method = "ListNames";
+
+  // Initialize the error
+  dbus_error_init(&err);
+
+  // Connect to the session bus
+  if (!is_connected && ((output = connect()) != ERROR_NONE)) {
+    return output;
+  }
+
+  msg = _dbus_msg_new_method_call(session, path, iface, method);
+  if (!msg) {
+    std::cerr << "Message Null" << std::endl;
+    return ERROR_NULL_PTR;
+  }
+
+  if ((output = send_dbus_msg_with_reply(msg, reply, err)) != ERROR_NONE) {
+    return output;
+  }
+
+  if (reply != nullptr) {
+    if (read_reply(reply, &sessions) == ERROR_NONE) {
+    }
+    // dbus_message_unref(reply);
+  }
+
+  // Clean up
+  dbus_message_unref(msg);
+  disconnect();
+  std::cout << "Cleanup done." << std::endl;
+
+  return ERROR_NONE;
 }
