@@ -135,9 +135,12 @@ public:
   static const std::string PATH;
 
 public:
-  MprisMediaPlayer(const std::string &session_name);
+  MprisMediaPlayer();
+  MprisMediaPlayer(const std::string &session);
 
-  // FIXME: search for list of services
+  void set_session_name(const std::string &session);
+
+  int get_session_list(std::vector<std::string> &sessions);
 
   bool can_control();
   bool can_go_next();
@@ -209,8 +212,6 @@ private:
                         DBusMessageIter *value_iter);
 
   int read_reply(DBusMessage *reply, void *output);
-
-  int get_session_list(std::vector<std::string> &sessions);
 
   bool is_connected;
   DBusConnection *conn;

@@ -5,8 +5,16 @@
 
 const std::string MprisMediaPlayer::PATH = "/org/mpris/MediaPlayer2";
 
+MprisMediaPlayer::MprisMediaPlayer() : session_name(""), is_connected(false) {}
+
 MprisMediaPlayer::MprisMediaPlayer(const std::string &session)
     : session_name(session), is_connected(false) {}
+
+void MprisMediaPlayer::set_session_name(const std::string &session) {
+  session_name = session;
+
+  std::cout << "configured session name = " << session_name << "\n";
+}
 
 int MprisMediaPlayer::connect() {
   DBusError err;
@@ -608,16 +616,17 @@ int MprisMediaPlayer::read_reply(DBusMessage *reply, void *output) {
     if (DBUS_TYPE_ARRAY == dbus_message_iter_get_arg_type(&args)) {
       DBusMessageIter sub_iter;
       char *str;
+      std::vector<std::string> sessions;
 
       dbus_message_iter_recurse(&args, &sub_iter);
+
       while (dbus_message_iter_get_arg_type(&sub_iter) == DBUS_TYPE_STRING) {
         dbus_message_iter_get_basic(&sub_iter, &str);
-
-        std::cout << str << ", ";
-        // result.push_back(str);
+        sessions.push_back(str);
         dbus_message_iter_next(&sub_iter);
       }
-      std::cout << std::endl;
+
+      *static_cast<std::vector<std::string> *>(output) = sessions;
       return ERROR_NONE;
     }
 
