@@ -1,16 +1,12 @@
-#include "spdlog/spdlog.h"
-#include <cstdint>
 #include <dbus/dbus.h>
-#include <iostream>
 #include <string>
 
-#include "log.h"
 #include "mpris_media_player.h"
 
 int main(void) {
 
   const std::string service_name =
-      "org.mpris.MediaPlayer2.ncspot.instance315730";
+      "org.mpris.MediaPlayer2.firefox.instance_1_30";
   // const std::string service_name =
   //     "org.mpris.MediaPlayer2.firefox.instance_1_20";
 

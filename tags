@@ -136,6 +136,10 @@ ARCHITECTURE_ID	build/CMakeFiles/3.29.6/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#
 ARCHITECTURE_ID	build/CMakeFiles/3.29.6/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#  define ARCHITECTURE_ID$/;"	d	file:
 A_formatter	include/spdlog/pattern_formatter-inl.h	/^    explicit A_formatter(padding_info padinfo)$/;"	f	class:spdlog::details::A_formatter
 A_formatter	include/spdlog/pattern_formatter-inl.h	/^class A_formatter : public flag_formatter {$/;"	c	namespace:spdlog::details
+Album	include/mpris_media_player.h	/^    Album,$/;"	e	enum:DBusMetadata::Key
+AlbumArtist	include/mpris_media_player.h	/^    AlbumArtist,$/;"	e	enum:DBusMetadata::Key
+ArtUrl	include/mpris_media_player.h	/^    ArtUrl = 1,$/;"	e	enum:DBusMetadata::Key
+Artist	include/mpris_media_player.h	/^    Artist,$/;"	e	enum:DBusMetadata::Key
 B_formatter	include/spdlog/pattern_formatter-inl.h	/^    explicit B_formatter(padding_info padinfo)$/;"	f	class:spdlog::details::B_formatter
 B_formatter	include/spdlog/pattern_formatter-inl.h	/^class B_formatter final : public flag_formatter {$/;"	c	namespace:spdlog::details
 CMAKE_AR	build/CMakeFiles/3.29.3/CMakeCCompiler.cmake	/^set(CMAKE_AR "\/sbin\/ar")$/;"	v
@@ -683,8 +687,6 @@ CanPlay	include/mpris_media_player.h	/^  CanPlay,$/;"	e	enum:DBusProperties
 CanSeek	include/mpris_media_player.h	/^  CanSeek,$/;"	e	enum:DBusProperties
 CommonSecondsType	include/spdlog/fmt/bundled/chrono.h	/^  using CommonSecondsType =$/;"	t	function:detail::get_milliseconds
 Container	include/spdlog/fmt/bin_to_hex.h	/^    using Container = std::span<Value, Extent>;$/;"	t	function:spdlog::to_hex	typeref:typename:std::span<Value,Extent>
-DBusGetSet	include/mpris_media_player.h	/^typedef enum DBusGetSet { Getter = 1, Setter } DBusGetSetType;$/;"	g
-DBusGetSetType	include/mpris_media_player.h	/^typedef enum DBusGetSet { Getter = 1, Setter } DBusGetSetType;$/;"	t	typeref:enum:DBusGetSet
 DBusLoopStatus	include/mpris_media_player.h	/^typedef enum DBusLoopStatus {$/;"	g
 DBusLoopStatusType	include/mpris_media_player.h	/^} DBusLoopStatusType;$/;"	t	typeref:enum:DBusLoopStatus
 DBusMetadata	include/mpris_media_player.h	/^struct DBusMetadata {$/;"	s
@@ -700,6 +702,7 @@ DEC	build/CMakeFiles/3.29.6/CompilerIdC/CMakeCCompilerId.c	/^#define DEC(/;"	d	f
 DEC	build/CMakeFiles/3.29.6/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#define DEC(/;"	d	file:
 D_formatter	include/spdlog/pattern_formatter-inl.h	/^    explicit D_formatter(padding_info padinfo)$/;"	f	class:spdlog::details::D_formatter
 D_formatter	include/spdlog/pattern_formatter-inl.h	/^class D_formatter final : public flag_formatter {$/;"	c	namespace:spdlog::details
+DiscNumber	include/mpris_media_player.h	/^    DiscNumber,$/;"	e	enum:DBusMetadata::Key
 DurationUnits	include/spdlog/pattern_formatter-inl.h	/^    using DurationUnits = Units;$/;"	t	class:spdlog::details::elapsed_formatter	typeref:typename:Units
 EQUALS	build/Makefile	/^EQUALS = =$/;"	m
 ERROR_DBUS	include/mpris_media_player.h	/^  ERROR_DBUS = -1,$/;"	e	enum:ErrorCode
@@ -848,7 +851,6 @@ F_formatter	include/spdlog/pattern_formatter-inl.h	/^    explicit F_formatter(pa
 F_formatter	include/spdlog/pattern_formatter-inl.h	/^class F_formatter final : public flag_formatter {$/;"	c	namespace:spdlog::details
 Factor	include/spdlog/fmt/bundled/chrono.h	/^  struct Factor$/;"	s	function:safe_duration_cast::safe_duration_cast
 From	include/spdlog/fmt/bundled/chrono.h	/^  using From = std::chrono::duration<FromRep, FromPeriod>;$/;"	t	function:safe_duration_cast::safe_duration_cast	typeref:typename:std::chrono::duration<FromRep,FromPeriod>
-Getter	include/mpris_media_player.h	/^typedef enum DBusGetSet { Getter = 1, Setter } DBusGetSetType;$/;"	e	enum:DBusGetSet
 HEX	build/CMakeFiles/3.29.3/CompilerIdC/CMakeCCompilerId.c	/^#define HEX(/;"	d	file:
 HEX	build/CMakeFiles/3.29.3/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^#define HEX(/;"	d	file:
 HEX	build/CMakeFiles/3.29.5/CompilerIdC/CMakeCCompilerId.c	/^#define HEX(/;"	d	file:
@@ -865,7 +867,10 @@ I_formatter	include/spdlog/pattern_formatter-inl.h	/^class I_formatter final : p
 IntermediateRep	include/spdlog/fmt/bundled/chrono.h	/^  using IntermediateRep =$/;"	t	function:safe_duration_cast::safe_duration_cast
 Iter	include/spdlog/fmt/bin_to_hex.h	/^    using Iter = typename Container::const_iterator;$/;"	t	function:spdlog::to_hex	typeref:typename:Container::const_iterator
 Iter	include/spdlog/fmt/bin_to_hex.h	/^    using Iter = typename Container::iterator;$/;"	t	function:spdlog::to_hex	typeref:typename:Container::iterator
+Key	include/mpris_media_player.h	/^  typedef enum Key {$/;"	g	struct:DBusMetadata
+KeyType	include/mpris_media_player.h	/^  } KeyType;$/;"	t	struct:DBusMetadata	typeref:enum:DBusMetadata::Key
 LOG_H	include/log.h	/^#define LOG_H$/;"	d
+Length	include/mpris_media_player.h	/^    Length,$/;"	e	enum:DBusMetadata::Key
 Log	include/log.h	/^  Log() {}$/;"	f	class:Log
 Log	include/log.h	/^  Log(const std::string &filename) : log_filename(filename) {$/;"	f	class:Log
 Log	include/log.h	/^class Log {$/;"	c
@@ -1062,7 +1067,6 @@ S_formatter	include/spdlog/pattern_formatter-inl.h	/^    explicit S_formatter(pa
 S_formatter	include/spdlog/pattern_formatter-inl.h	/^class S_formatter final : public flag_formatter {$/;"	c	namespace:spdlog::details
 Seek	include/mpris_media_player.h	/^  Seek,$/;"	e	enum:DBusMethods
 SetPosition	include/mpris_media_player.h	/^  SetPosition,$/;"	e	enum:DBusMethods
-Setter	include/mpris_media_player.h	/^typedef enum DBusGetSet { Getter = 1, Setter } DBusGetSetType;$/;"	e	enum:DBusGetSet
 Shuffle	include/mpris_media_player.h	/^  Shuffle,$/;"	e	enum:DBusProperties
 Stop	include/mpris_media_player.h	/^  Stop$/;"	e	enum:DBusMethods
 T	include/spdlog/fmt/bundled/chrono.h	/^  using T = std::numeric_limits<To>;$/;"	t	function:safe_duration_cast::lossless_integral_conversion	typeref:typename:std::numeric_limits<To>
@@ -1072,7 +1076,13 @@ TX_BUFFER_SIZE	include/spdlog/details/udp_client-windows.h	/^    static constexp
 TX_BUFFER_SIZE	include/spdlog/details/udp_client.h	/^    static constexpr int TX_BUFFER_SIZE = 1024 * 10;$/;"	m	class:spdlog::details::udp_client	typeref:typename:int
 T_formatter	include/spdlog/pattern_formatter-inl.h	/^    explicit T_formatter(padding_info padinfo)$/;"	f	class:spdlog::details::T_formatter
 T_formatter	include/spdlog/pattern_formatter-inl.h	/^class T_formatter final : public flag_formatter {$/;"	c	namespace:spdlog::details
+Title	include/mpris_media_player.h	/^    Title,$/;"	e	enum:DBusMetadata::Key
 ToRep	include/spdlog/fmt/bundled/chrono.h	/^  using ToRep = typename To::rep;$/;"	t	function:safe_duration_cast::safe_duration_cast	typeref:typename:To::rep
+TrackId	include/mpris_media_player.h	/^    TrackId,$/;"	e	enum:DBusMetadata::Key
+TrackNumber	include/mpris_media_player.h	/^    TrackNumber,$/;"	e	enum:DBusMetadata::Key
+Unknown	include/mpris_media_player.h	/^    Unknown$/;"	e	enum:DBusMetadata::Key
+Url	include/mpris_media_player.h	/^    Url,$/;"	e	enum:DBusMetadata::Key
+UserRating	include/mpris_media_player.h	/^    UserRating,$/;"	e	enum:DBusMetadata::Key
 Volume	include/mpris_media_player.h	/^  Volume$/;"	e	enum:DBusProperties
 WIN32_LEAN_AND_MEAN	include/spdlog/details/tcp_client-windows.h	/^#define WIN32_LEAN_AND_MEAN$/;"	d
 WIN32_LEAN_AND_MEAN	include/spdlog/details/windows_include.h	/^    #define WIN32_LEAN_AND_MEAN$/;"	d
@@ -1180,6 +1190,7 @@ advance_to	include/spdlog/fmt/bundled/printf.h	/^  void advance_to(detail::buffe
 after_close	include/spdlog/common.h	/^    std::function<void(const filename_t &filename)> after_close;$/;"	m	struct:spdlog::file_event_handlers	typeref:typename:std::function<void (const filename_t & filename)>
 after_open	include/spdlog/common.h	/^    std::function<void(const filename_t &filename, std::FILE *file_stream)> after_open;$/;"	m	struct:spdlog::file_event_handlers	typeref:typename:std::function<void (const filename_t & filename,std::FILE * file_stream)>
 aggregate_formatter	include/spdlog/pattern_formatter-inl.h	/^class aggregate_formatter final : public flag_formatter {$/;"	c	namespace:spdlog::details
+album	include/mpris_media_player.h	/^  std::string album;$/;"	m	struct:DBusMetadata	typeref:typename:std::string
 album_artist	include/mpris_media_player.h	/^  std::vector<std::string> album_artist;$/;"	m	struct:DBusMetadata	typeref:typename:std::vector<std::string>
 alice_blue	include/spdlog/fmt/bundled/color.h	/^  alice_blue = 0xF0F8FF,               \/\/ rgb(240,248,255)$/;"	e	enum:color
 align	include/spdlog/fmt/bundled/core.h	/^  align_t align : 4;$/;"	m	struct:format_specs	typeref:typename:align_t:4
@@ -1660,8 +1671,8 @@ const	build/CMakeFiles/3.29.6/CompilerIdC/CMakeCCompilerId.c	/^# define const$/;
 const_check	include/spdlog/fmt/bundled/core.h	/^template <typename T> constexpr FMT_INLINE auto const_check(T value) -> T {$/;"	f	namespace:detail	typeref:typename:T
 const_reference	include/spdlog/fmt/bundled/core.h	/^  using const_reference = const T&;$/;"	t	class:detail::buffer	typeref:typename:const T &
 const_reference	include/spdlog/fmt/bundled/format.h	/^  using const_reference = const T&;$/;"	t	class:basic_memory_buffer	typeref:typename:const T &
-construct_new_dbus_msg	src/mpris_media_player.cpp	/^int MprisMediaPlayer::construct_new_dbus_msg(DBusGetSetType getset_type,$/;"	f	class:MprisMediaPlayer	typeref:typename:int
-construct_new_dbus_msg	src/mpris_media_player.cpp	/^int MprisMediaPlayer::construct_new_dbus_msg(DBusMessage *&msg,$/;"	f	class:MprisMediaPlayer	typeref:typename:int
+construct_new_dbus_msg	src/mpris_media_player.cpp	/^int MprisMediaPlayer::construct_new_dbus_msg(DBusMethodType type,$/;"	f	class:MprisMediaPlayer	typeref:typename:int
+construct_new_dbus_msg	src/mpris_media_player.cpp	/^int MprisMediaPlayer::construct_new_dbus_msg(DBusPropertyType type,$/;"	f	class:MprisMediaPlayer	typeref:typename:int
 container_	include/spdlog/fmt/bundled/core.h	/^  Container& container_;$/;"	m	class:detail::iterator_buffer	typeref:typename:Container &
 context	include/spdlog/fmt/bundled/chrono.h	/^  FormatContext& context;$/;"	m	struct:detail::chrono_formatter	typeref:typename:FormatContext &
 context	include/spdlog/fmt/bundled/core.h	/^    using context = detail::compile_parse_context<Char>;$/;"	t	function:basic_format_parse_context::check_dynamic_spec	typeref:typename:detail::compile_parse_context<Char>
@@ -1938,12 +1949,12 @@ disable_backtrace	include/spdlog/details/registry-inl.h	/^SPDLOG_INLINE void reg
 disable_backtrace	include/spdlog/logger-inl.h	/^SPDLOG_INLINE void logger::disable_backtrace() { tracer_.disable(); }$/;"	f	class:spdlog::logger	typeref:typename:SPDLOG_INLINE void
 disable_backtrace	include/spdlog/spdlog-inl.h	/^SPDLOG_INLINE void disable_backtrace() { details::registry::instance().disable_backtrace(); }$/;"	f	namespace:spdlog	typeref:typename:SPDLOG_INLINE void
 disabled	include/spdlog/fmt/bundled/ranges.h	/^enum class range_format { disabled, map, set, sequence, string, debug_string };$/;"	e	enum:range_format
+disc_number	include/mpris_media_player.h	/^  int32_t disc_number;$/;"	m	struct:DBusMetadata	typeref:typename:int32_t
 discard_counter	include/spdlog/details/mpmc_blocking_q.h	/^    size_t discard_counter() { return discard_counter_.load(std::memory_order_relaxed); }$/;"	f	class:spdlog::details::mpmc_blocking_queue	typeref:typename:size_t
 discard_counter	include/spdlog/details/thread_pool-inl.h	/^size_t SPDLOG_INLINE thread_pool::discard_counter() { return q_.discard_counter(); }$/;"	f	class:spdlog::details::thread_pool	typeref:typename:size_t SPDLOG_INLINE
 discard_counter_	include/spdlog/details/mpmc_blocking_q.h	/^    std::atomic<size_t> discard_counter_{0};$/;"	m	class:spdlog::details::mpmc_blocking_queue	typeref:typename:std::atomic<size_t>
 discard_new	include/spdlog/async_logger.h	/^    discard_new      \/\/ Discard new message if the queue is full when trying to add new item.$/;"	e	enum:spdlog::async_overflow_policy
 disconnect	src/mpris_media_player.cpp	/^void MprisMediaPlayer::disconnect() {$/;"	f	class:MprisMediaPlayer	typeref:typename:void
-disk_number	include/mpris_media_player.h	/^  int32_t disk_number;$/;"	m	struct:DBusMetadata	typeref:typename:int32_t
 dispatcher	include/spdlog/fmt/bundled/chrono.h	/^    dispatcher(std::time_t t) : time_(t) {}$/;"	f	struct:gmtime::dispatcher
 dispatcher	include/spdlog/fmt/bundled/chrono.h	/^    dispatcher(std::time_t t) : time_(t) {}$/;"	f	struct:localtime::dispatcher
 dispatcher	include/spdlog/fmt/bundled/chrono.h	/^  struct dispatcher {$/;"	s	function:gmtime
@@ -2064,8 +2075,8 @@ event_id_	include/spdlog/sinks/win_eventlog_sink.h	/^    DWORD event_id_;$/;"	m	
 event_log_handle	include/spdlog/sinks/win_eventlog_sink.h	/^    HANDLE event_log_handle() {$/;"	f	class:spdlog::sinks::win_eventlog::win_eventlog_sink	typeref:typename:HANDLE
 eventlog	include/spdlog/sinks/win_eventlog_sink.h	/^struct eventlog {$/;"	s	namespace:spdlog::sinks::win_eventlog::internal
 exchange	include/spdlog/details/null_mutex.h	/^    int exchange(int new_value, std::memory_order = std::memory_order_relaxed) {$/;"	f	struct:spdlog::details::null_atomic_int	typeref:typename:int
-execute_base_method_func	src/mpris_media_player.cpp	/^void MprisMediaPlayer::execute_base_method_func(DBusMethodType type) {$/;"	f	class:MprisMediaPlayer	typeref:typename:void
-execute_base_property_func	src/mpris_media_player.cpp	/^int MprisMediaPlayer::execute_base_property_func(DBusGetSetType getset,$/;"	f	class:MprisMediaPlayer	typeref:typename:int
+execute_base_method_func	src/mpris_media_player.cpp	/^void MprisMediaPlayer::execute_base_method_func(DBusMethodType type,$/;"	f	class:MprisMediaPlayer	typeref:typename:void
+execute_base_property_func	src/mpris_media_player.cpp	/^int MprisMediaPlayer::execute_base_property_func(DBusPropertyType type,$/;"	f	class:MprisMediaPlayer	typeref:typename:int
 exp	include/spdlog/fmt/bundled/format.h	/^  exp,      \/\/ Exponent notation with the default precision of 6, e.g. 1.2e-3.$/;"	e	enum:detail::float_format
 exp_	include/spdlog/fmt/bundled/format.h	/^  int exp_;$/;"	m	class:detail::bigint	typeref:typename:int
 exp_lower	include/spdlog/fmt/bundled/core.h	/^  exp_lower,       \/\/ 'e'$/;"	e	enum:presentation_type
@@ -2527,18 +2538,20 @@ get_foreground	include/spdlog/fmt/bundled/color.h	/^  FMT_CONSTEXPR auto get_for
 get_id	include/spdlog/fmt/bundled/core.h	/^  auto get_id(basic_string_view<Char> name) const -> int {$/;"	f	class:basic_format_args	typeref:typename:int
 get_iterator	include/spdlog/fmt/bundled/core.h	/^FMT_INLINE auto get_iterator(Buf& buf, OutputIt) -> decltype(buf.out()) {$/;"	f	namespace:detail	typeref:typename:decltype(buf.out ())
 get_iterator	include/spdlog/fmt/bundled/core.h	/^auto get_iterator(buffer<T>&, OutputIt out) -> OutputIt {$/;"	f	namespace:detail	typeref:typename:OutputIt
+get_keytype	include/mpris_media_player.h	/^  KeyType get_keytype(const std::string &key) {$/;"	f	struct:DBusMetadata	typeref:typename:KeyType
 get_level	include/spdlog/spdlog-inl.h	/^SPDLOG_INLINE level::level_enum get_level() { return default_logger_raw()->level(); }$/;"	f	namespace:spdlog	typeref:typename:SPDLOG_INLINE level::level_enum
 get_level_color	include/spdlog/sinks/qt_sinks.h	/^    QTextCharFormat &get_level_color(level::level_enum color_level) {$/;"	f	class:spdlog::sinks::qt_color_sink	typeref:typename:QTextCharFormat &
 get_locale	include/spdlog/fmt/bundled/chrono.h	/^  get_locale(bool localized, locale_ref loc) : has_locale_(localized) {$/;"	f	class:detail::get_locale
 get_locale	include/spdlog/fmt/bundled/chrono.h	/^class get_locale {$/;"	c	namespace:detail
 get_loop_status	src/mpris_media_player.cpp	/^std::string MprisMediaPlayer::get_loop_status() {$/;"	f	class:MprisMediaPlayer	typeref:typename:std::string
 get_maximum_rate	src/mpris_media_player.cpp	/^double MprisMediaPlayer::get_maximum_rate() {$/;"	f	class:MprisMediaPlayer	typeref:typename:double
-get_metadata	src/mpris_media_player.cpp	/^void MprisMediaPlayer::get_metadata() {$/;"	f	class:MprisMediaPlayer	typeref:typename:void
+get_metadata	src/mpris_media_player.cpp	/^void MprisMediaPlayer::get_metadata(DBusMetadata &metadata) {$/;"	f	class:MprisMediaPlayer	typeref:typename:void
 get_milliseconds	include/spdlog/fmt/bundled/chrono.h	/^inline auto get_milliseconds(std::chrono::duration<Rep, Period> d)$/;"	f	namespace:detail	typeref:typename:std::chrono::duration<Rep,std::milli>
 get_minimum_rate	src/mpris_media_player.cpp	/^double MprisMediaPlayer::get_minimum_rate() {$/;"	f	class:MprisMediaPlayer	typeref:typename:double
 get_path_string	include/spdlog/fmt/bundled/std.h	/^auto get_path_string(const std::filesystem::path& p,$/;"	f	namespace:detail	typeref:typename:auto
 get_position	src/mpris_media_player.cpp	/^int64_t MprisMediaPlayer::get_position() {$/;"	f	class:MprisMediaPlayer	typeref:typename:int64_t
 get_rate	src/mpris_media_player.cpp	/^double MprisMediaPlayer::get_rate() {$/;"	f	class:MprisMediaPlayer	typeref:typename:double
+get_session_list	src/mpris_media_player.cpp	/^int MprisMediaPlayer::get_session_list(std::vector<std::string> &sessions) {$/;"	f	class:MprisMediaPlayer	typeref:typename:int
 get_shuffle	src/mpris_media_player.cpp	/^bool MprisMediaPlayer::get_shuffle() {$/;"	f	class:MprisMediaPlayer	typeref:typename:bool
 get_significand_size	include/spdlog/fmt/bundled/format.h	/^constexpr auto get_significand_size(const big_decimal_fp& f) -> int {$/;"	f	namespace:detail	typeref:typename:int
 get_significand_size	include/spdlog/fmt/bundled/format.h	/^inline auto get_significand_size(const dragonbox::decimal_fp<T>& f) -> int {$/;"	f	namespace:detail	typeref:typename:int
@@ -4008,6 +4021,7 @@ sea_green	include/spdlog/fmt/bundled/color.h	/^  sea_green = 0x2E8B57,          
 sea_shell	include/spdlog/fmt/bundled/color.h	/^  sea_shell = 0xFFF5EE,                \/\/ rgb(255,245,238)$/;"	e	enum:color
 second	include/spdlog/fmt/bundled/chrono.h	/^  auto second() const -> Rep { return static_cast<Rep>(mod(s.count(), 60)); }$/;"	f	struct:detail::chrono_formatter	typeref:typename:Rep
 seconds	include/spdlog/fmt/bundled/chrono.h	/^  using seconds = std::chrono::duration<rep>;$/;"	t	struct:detail::chrono_formatter	typeref:typename:std::chrono::duration<rep>
+seek	src/mpris_media_player.cpp	/^void MprisMediaPlayer::seek(int64_t offset) {$/;"	f	class:MprisMediaPlayer	typeref:typename:void
 send	include/spdlog/details/tcp_client-windows.h	/^    void send(const char *data, size_t n_bytes) {$/;"	f	class:spdlog::details::tcp_client	typeref:typename:void
 send	include/spdlog/details/tcp_client.h	/^    void send(const char *data, size_t n_bytes) {$/;"	f	class:spdlog::details::tcp_client	typeref:typename:void
 send	include/spdlog/details/udp_client-windows.h	/^    void send(const char *data, size_t n_bytes) {$/;"	f	class:spdlog::details::udp_client	typeref:typename:void

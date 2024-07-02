@@ -493,3 +493,16 @@
 [2024-06-28 16:30:18.703] [MprisMediaPlayer] [error] [DBUS ERROR] Error in Send Message: org.freedesktop.DBus.Error.NoReply - Did not receive a reply. Possible causes include: the remote application did not send a reply, the message bus security policy blocked the reply, the reply timeout expired, or the network connection was broken.
 [2024-06-28 16:32:00.376] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance315730) is connected
 [2024-06-28 16:34:12.132] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance315730) is connected
+[2024-06-30 19:56:02.268] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.ncspot.instance_1_30) is connected
+[2024-06-30 19:56:02.268] [MprisMediaPlayer] [error] [DBUS ERROR] Error in Send Message: org.freedesktop.DBus.Error.ServiceUnknown - The name is not activatable
+[2024-06-30 19:56:46.968] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.firefox.instance_1_30) is connected
+[2024-06-30 19:57:10.790] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.firefox.instance_1_30) is connected
+[2024-06-30 19:58:53.941] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.firefox.instance_1_30) is connected
+[2024-06-30 19:59:13.493] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.firefox.instance_1_30) is connected
+[2024-06-30 20:01:13.094] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.firefox.instance_1_30) is connected
+[2024-06-30 20:03:01.462] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.firefox.instance_1_30) is connected
+[2024-06-30 20:03:31.106] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.firefox.instance_1_30) is connected
+[2024-06-30 20:03:43.092] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.firefox.instance_1_30) is connected
+[2024-06-30 20:03:51.286] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.firefox.instance_1_30) is connected
+[2024-06-30 20:04:22.293] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.firefox.instance_1_30) is connected
+[2024-06-30 20:04:25.559] [MprisMediaPlayer] [debug] Session(org.mpris.MediaPlayer2.firefox.instance_1_30) is connected

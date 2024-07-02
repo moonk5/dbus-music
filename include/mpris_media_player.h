@@ -1,12 +1,12 @@
 #ifndef MPRIS_MEDIA_PLAYER_H
 #define MPRIS_MEDIA_PLAYER_H
 
-#include "log.h"
 #include <cstdint>
 #include <dbus/dbus.h>
 #include <iostream>
 #include <string>
 #include <unordered_map>
+#include <vector>
 
 typedef enum ErrorCode {
   ERROR_NONE = 1,
@@ -216,8 +216,6 @@ private:
   DBusConnection *conn;
 
   std::string session_name;
-
-  Log log;
 };
 
 #endif /* MPRIS_MEDIA_PLAYER_H */

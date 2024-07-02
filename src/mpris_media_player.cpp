@@ -6,9 +6,7 @@
 const std::string MprisMediaPlayer::PATH = "/org/mpris/MediaPlayer2";
 
 MprisMediaPlayer::MprisMediaPlayer(const std::string &session)
-    : session_name(session), is_connected(false) {
-  log = Log("MprisMediaPlayer");
-}
+    : session_name(session), is_connected(false) {}
 
 int MprisMediaPlayer::connect() {
   DBusError err;
@@ -28,7 +26,6 @@ int MprisMediaPlayer::connect() {
 
   conn = dbus_bus_get(DBUS_BUS_SESSION, &err);
   if (dbus_error_is_set(&err)) {
-    log.error(get_dbus_error("Connection Error", &err));
     return ERROR_DBUS;
   }
 
@@ -38,7 +35,6 @@ int MprisMediaPlayer::connect() {
   }
 
   is_connected = true;
-  log.debug("Session(" + session_name + ") is connected");
 
   return ERROR_NONE;
 }
@@ -413,7 +409,6 @@ int MprisMediaPlayer::send_dbus_msg_with_reply(DBusMessage *&msg,
   std::cout << "Sending the message and waiting for a reply..." << std::endl;
   reply = dbus_connection_send_with_reply_and_block(conn, msg, -1, &err);
   if (dbus_error_is_set(&err)) {
-    log.error(get_dbus_error("Error in Send Message", &err));
     dbus_message_unref(msg);
     return ERROR_DBUS;
   }
